@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'ImmersionTracker.accounts',
-    'ImmersionTracker.immersion_entries',
-    'ImmersionTracker.web',
+    'ImmersionTracker.accounts.apps.AccountsConfig',
+    'ImmersionTracker.immersion_entries.apps.ImmersionEntriesConfig',
+    'ImmersionTracker.web.apps.WebConfig',
 ]
 
 MIDDLEWARE = [
