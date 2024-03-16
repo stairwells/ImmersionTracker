@@ -104,6 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = ()
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -128,3 +130,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.ImmersionTrackerUser'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'

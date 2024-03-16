@@ -1,0 +1,8 @@
+{% block main_content %}
+    <form action="{% url 'login' %}?next={{ next }}" method="post">
+        {{ form.as_p }}
+        <button type="submit"> Submit </button>
+
+        {% csrf_token %}
+    </form>
+{% endblock %}
