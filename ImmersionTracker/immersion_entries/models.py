@@ -1,7 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
-
-UserModel = get_user_model()
+from ImmersionTracker.accounts.models import Profile
 
 
 class BaseEntry(models.Model):
@@ -13,7 +11,7 @@ class BaseEntry(models.Model):
     edited_on = models.DateTimeField(
         auto_now=True,
     )
-    user = models.ForeignKey(UserModel, on_delete=models.RESTRICT)
+    user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
