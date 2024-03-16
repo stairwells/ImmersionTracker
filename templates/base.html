@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Immersion Tracker</title>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-bar-left"></div>
+        <div class="nav-bar-right">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="#"> Profile </a></li>
+                {% else %}
+                    <li><a href="#"> Log In </a></li>
+                    <li><a href="#"> Register </a></li>
+                {% endif %}
+                <li><img src="#" alt="prof-pic"></li>
+            </ul>
+        </div>
+    </div>
+    {% block main_content %}
+    {% endblock %}
+</body>
+</html>
