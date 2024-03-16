@@ -103,3 +103,28 @@ class ImmersionTrackerUser(auth_models.AbstractBaseUser, auth_models.Permissions
     object = ImmersionTrackerUserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Profile(models.Model):
+    NICKNAME_MAX_LENGTH = 20
+
+    nickname = models.CharField(
+        max_length=20,
+
+        blank=True,
+        null=True,
+    )
+
+    reading_time = models.DurationField()
+    listening_time = models.DurationField()
+    srs_time = models.DurationField()
+
+    @property
+    def immersion_time(self):
+        # Returns sum of immersion time, does not include SRS
+        return self.reading_time + self.listening_time
+
+    @property
+    def total_time(self):
+        # Returns sum of ALL immersion time, including SRS
+        return sum((self.reading_time, self.listening_time, self.srs_time))
