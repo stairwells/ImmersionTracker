@@ -11,7 +11,13 @@ class BaseEntry(models.Model):
     edited_on = models.DateTimeField(
         auto_now=True,
     )
-    user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         abstract = True
