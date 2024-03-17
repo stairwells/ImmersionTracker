@@ -1,0 +1,9 @@
+{% block main_content %}
+    <div>Nickname: {{ object.nickname }}</div>
+    <div>Reading Time: {{ object.reading_time }}</div>
+    <div>Listening Time: {{ object.listening_time }}</div>
+    <div>SRS Time: {{ object.srs_time }}</div>
+    <div>Total immersion Time: {{ object.immersion_time }}</div>
+
+    <a href="{% url 'edit_profile' pk=request.user.id %}"> Edit </a>
+{% endblock %}

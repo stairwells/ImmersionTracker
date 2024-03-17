@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import forms as auth_forms, views as auth_views, get_user_model, logout
 
+from ImmersionTracker.accounts.models import Profile
+
 
 class ImmersionTrackerUserCreationForm(auth_forms.UserCreationForm):
     class Meta(auth_forms.UserCreationForm.Meta):
@@ -24,4 +26,18 @@ class LoginView(auth_views.LoginView):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+class ProfileDetailsView(views.DetailView):
+    queryset = Profile.objects.all()
+
+    template_name = 'accounts/profile_details.html'
+
+
+class EditProfileView(views.UpdateView):
+    queryset = Profile.objects.all()
+
+    template_name = 'accounts/edit_profile.html'
+    fields = ('nickname',)
+    success_url = reverse_lazy('index')
 
