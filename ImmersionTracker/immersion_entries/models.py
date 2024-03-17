@@ -14,9 +14,8 @@ class BaseEntry(models.Model):
     user_profile = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
-        related_name='entries',
+        related_name='%(class)s',
 
-        blank=True,
         null=True,
     )
 

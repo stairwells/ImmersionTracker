@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib import auth
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.hashers import make_password
@@ -107,6 +109,7 @@ class ImmersionTrackerUser(auth_models.AbstractBaseUser, auth_models.Permissions
 
 class Profile(models.Model):
     NICKNAME_MAX_LENGTH = 20
+    INITIAL_DURATION = timedelta(hours=0, minutes=0, seconds=0)
 
     nickname = models.CharField(
         max_length=20,
@@ -115,9 +118,16 @@ class Profile(models.Model):
         null=True,
     )
 
-    reading_time = models.DurationField()
-    listening_time = models.DurationField()
-    srs_time = models.DurationField()
+    reading_time = models.DurationField(default=INITIAL_DURATION)
+    listening_time = models.DurationField(default=INITIAL_DURATION)
+    srs_time = models.DurationField(default=INITIAL_DURATION)
+
+    user = models.OneToOneField(
+        ImmersionTrackerUser,
+        on_delete=models.CASCADE,
+        related_name='profile',
+        primary_key=True,
+    )
 
     @property
     def immersion_time(self):
