@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    {% for media in reading_media %}
+        <p> media </p>
+        <a href="{% url 'reading_media_details' pk=media.pk %}">Details</a>
+    {% endfor %}
+    <a href="{% url 'reading_media_create' %}"> New reading media </a>
+
+    {% for media in listening_media %}
+        <p> media </p>
+        <a href="{% url 'listening_media_details' pk=media.pk %}">Details</a>
+    {% endfor %}
+    <a href="{% url 'listening_media_create' %}">New Listening Media</a>
+{% endblock %}
