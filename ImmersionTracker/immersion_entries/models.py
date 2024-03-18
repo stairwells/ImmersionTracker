@@ -1,9 +1,10 @@
 from django.db import models
 from ImmersionTracker.accounts.models import Profile
+from ImmersionTracker.media.models import ReadingMedia, ListeningMedia
 
 
 class BaseEntry(models.Model):
-    time_length = models.TimeField()
+    time_length = models.DurationField()
 
     created_on = models.DateTimeField(
         auto_now_add=True,
@@ -25,10 +26,19 @@ class BaseEntry(models.Model):
 
 class ReadingEntry(BaseEntry):
     char_length = models.IntegerField(default=None)
+    media = models.ForeignKey(
+        ReadingMedia,
+        on_delete=models.DO_NOTHING,
+        related_name='entries',
+    )
 
 
 class ListeningEntry(BaseEntry):
-    pass
+    media = models.ForeignKey(
+        ListeningMedia,
+        on_delete=models.DO_NOTHING,
+        related_name='entries',
+    )
 
 
 class SRSEntry(BaseEntry):
