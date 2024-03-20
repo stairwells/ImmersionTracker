@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <div>Time: {{ object.time_length }}</div>
+    <div>Characters: {{ object.char_length }}</div>
+    <div>Media: {{ object.media|stringformat:'r' }}</div>
+{% endblock %}

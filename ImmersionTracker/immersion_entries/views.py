@@ -29,6 +29,14 @@ class ReadingEntryCreateView(views.CreateView):
         return super().form_valid(form)
 
 
+class ReadingEntryDetailsView(views.DetailView):
+    template_name = 'immersion_entries/reading_entry_details.html'
+
+    def get_queryset(self):
+        queryset = ReadingEntry.objects.filter(user_profile=get_current_profile(self.request))
+        return queryset
+
+
 class ListeningEntryCreateView(views.CreateView):
     queryset = ListeningEntry.objects.all()
     fields = ('time_length', 'media',)
@@ -41,3 +49,11 @@ class ListeningEntryCreateView(views.CreateView):
         instance.user_profile = get_current_profile(self.request)
 
         return super().form_valid(form)
+
+
+class ListeningEntryDetails(views.DetailView):
+    template_name = 'immersion_entries/listening_entry_details.html'
+
+    def get_queryset(self):
+        queryset = ListeningEntry.objects.filter(user_profile=get_current_profile(self.request))
+        return queryset

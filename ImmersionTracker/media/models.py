@@ -55,6 +55,9 @@ class ReadingMedia(BaseMedia):
         choices=STATUS_CHOICES,
     )
 
+    def __repr__(self):
+        return f"{self.name}"
+
 
 class ListeningMedia(BaseMedia):
     STATUS_MAX_LENGTH = 10
@@ -74,3 +77,6 @@ class ListeningMedia(BaseMedia):
         max_length=STATUS_MAX_LENGTH,
         choices=STATUS_CHOICES,
     )
+
+    def __repr__(self):
+        return f"{self.name}"
