@@ -10,6 +10,8 @@
         <div class="nav-bar-right">
             <ul>
                 {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'all_media' %}"> Media </a></li>
+                    <li><a href="{% url 'all_entries' %}"> Entries </a></li>
                     <li><a href="{% url 'profile_details' pk=request.user.id%}"> Profile </a></li>
                     <li><a href="{% url 'logout' %}"> Logout </a></li>
                 {% else %}

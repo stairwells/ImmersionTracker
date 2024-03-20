@@ -32,6 +32,9 @@ class ReadingEntry(BaseEntry):
         related_name='entries',
     )
 
+    def __repr__(self):
+        return f"{self.media.name}: {self.time_length} ({self.char_length})"
+
 
 class ListeningEntry(BaseEntry):
     media = models.ForeignKey(
@@ -39,6 +42,9 @@ class ListeningEntry(BaseEntry):
         on_delete=models.DO_NOTHING,
         related_name='entries',
     )
+
+    def __repr__(self):
+        return f"{self.media.name}: {self.time_length}"
 
 
 class SRSEntry(BaseEntry):

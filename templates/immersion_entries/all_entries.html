@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    {% for entry in reading_entries %}
+        <p> {{ entry|stringformat:'r' }} </p>
+    {% endfor %}
+    <p><a href="{% url 'reading_entry_create' %}"> New reading entry </a></p>
+
+    {% for entry in listening_entries %}
+        <p> {{ entry|stringformat:'r' }} </p>
+    {% endfor %}
+    <p><a href="{% url 'listening_entry_create' %}"> New listening entry </a></p>
+{% endblock %}

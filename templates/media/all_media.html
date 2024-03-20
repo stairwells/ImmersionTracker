@@ -5,11 +5,11 @@
         <p> media </p>
         <a href="{% url 'reading_media_details' pk=media.pk %}">Details</a>
     {% endfor %}
-    <a href="{% url 'reading_media_create' %}"> New reading media </a>
+    <p><a href="{% url 'reading_media_create' %}"> New reading media </a></p>
 
     {% for media in listening_media %}
         <p> media </p>
-        <a href="{% url 'listening_media_details' pk=media.pk %}">Details</a>
+        <p><a href="{% url 'listening_media_details' pk=media.pk %}">Details</a></p>
     {% endfor %}
     <a href="{% url 'listening_media_create' %}">New Listening Media</a>
 {% endblock %}
