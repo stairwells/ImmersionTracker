@@ -48,11 +48,12 @@ class ListeningEntry(BaseEntry):
 
 
 class SRSEntry(BaseEntry):
-    cards_studied = models.IntegerField(
-        blank=True,
-        null=True,
-    )
     new_cards = models.IntegerField(
         blank=True,
         null=True,
     )
+
+    def __repr__(self):
+        s = '' if self.new_cards == 1 else 's'
+        return f"{self.time_length} - {self.new_cards} New card{s}"
+

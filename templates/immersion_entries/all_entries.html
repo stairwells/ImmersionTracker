@@ -2,12 +2,20 @@
 
 {% block main_content %}
     {% for entry in reading_entries %}
-        <p> {{ entry|stringformat:'r' }} - </p><a href="{% url 'reading_entry_details' pk=entry.pk %}">Details</a>
+        <p> {{ entry|stringformat:'r' }} - </p><a href="{% url 'reading_entry_details' pk=entry.pk %}"> Details </a>
+        <a href="{% url 'reading_entry_edit' pk=entry.pk %}"> Edit </a>
     {% endfor %}
     <p><a href="{% url 'reading_entry_create' %}"> New reading entry </a></p>
 
     {% for entry in listening_entries %}
-        <p> {{ entry|stringformat:'r' }} - </p><a href="{% url 'listening_entry_details' pk=entry.pk %}">Details</a>
+        <p> {{ entry|stringformat:'r' }} - </p><a href="{% url 'listening_entry_details' pk=entry.pk %}"> Details </a>
+        <a href="{% url 'listening_entry_edit' pk=entry.pk %}"> Edit </a>
     {% endfor %}
     <p><a href="{% url 'listening_entry_create' %}"> New listening entry </a></p>
+
+    {% for entry in srs_entries %}
+        <p> {{ entry|stringformat:'r' }} - </p><a href="{% url 'srs_entry_details' pk=entry.pk %}"> Details </a>
+        <a href="{% url 'srs_entry_edit' pk=entry.pk %}"> Edit </a>
+    {% endfor %}
+    <p><a href="{% url 'srs_entry_create' %}"> New SRS entry </a></p>
 {% endblock %}

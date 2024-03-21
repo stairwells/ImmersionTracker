@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <form action="{% url 'srs_entry_create' %}" method="post">
+        {{ form.as_p }}
+
+        {% csrf_token %}
+        <button type="submit"> Create </button>
+    </form>
+{% endblock %}
