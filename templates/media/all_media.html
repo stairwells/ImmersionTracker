@@ -2,13 +2,13 @@
 
 {% block main_content %}
     {% for media in reading_media %}
-        <p> media </p>
+        <p> {{ media|stringformat:'r' }} </p>
         <a href="{% url 'reading_media_details' pk=media.pk %}">Details</a>
     {% endfor %}
     <p><a href="{% url 'reading_media_create' %}"> New reading media </a></p>
 
     {% for media in listening_media %}
-        <p> media </p>
+        <p> {{ media|stringformat:'r' }} </p>
         <p><a href="{% url 'listening_media_details' pk=media.pk %}">Details</a></p>
     {% endfor %}
     <a href="{% url 'listening_media_create' %}">New Listening Media</a>

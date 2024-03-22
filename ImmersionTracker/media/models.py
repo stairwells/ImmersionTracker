@@ -1,6 +1,6 @@
 from django.db import models
-
-# Create your models here.
+from ImmersionTracker.languages.models import Language
+from ImmersionTracker.accounts.models import Profile
 
 
 class BaseMedia(models.Model):
@@ -29,14 +29,33 @@ class BaseMedia(models.Model):
     status = models.CharField(
     )
 
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.CASCADE,
+        related_name='%(class)s',
+
+        blank=False,
+        null=False,
+    )
+
+    user_profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='%(class)s',
+
+        blank=False,
+        null=False,
+    )
+
     def __repr__(self):
-        return f"{self.name} ({self.type})"
+        return f"{self.name} ({self.type}): {self.status}"
 
     class Meta:
         abstract = True
 
 
 class ReadingMedia(BaseMedia):
+
     STATUS_MAX_LENGTH = 10
     STATUS_READING = 'Reading'
     STATUS_COMPLETED = 'Completed'
@@ -55,11 +74,8 @@ class ReadingMedia(BaseMedia):
         choices=STATUS_CHOICES,
     )
 
-    def __repr__(self):
-        return f"{self.name}"
-
-
 class ListeningMedia(BaseMedia):
+
     STATUS_MAX_LENGTH = 10
     STATUS_LISTENING = 'Listening'
     STATUS_COMPLETED = 'Completed'
@@ -77,6 +93,3 @@ class ListeningMedia(BaseMedia):
         max_length=STATUS_MAX_LENGTH,
         choices=STATUS_CHOICES,
     )
-
-    def __repr__(self):
-        return f"{self.name}"

@@ -1,6 +1,7 @@
 from django.db import models
 from ImmersionTracker.accounts.models import Profile
 from ImmersionTracker.media.models import ReadingMedia, ListeningMedia
+from ImmersionTracker.languages.models import Language
 
 
 class BaseEntry(models.Model):
@@ -17,7 +18,17 @@ class BaseEntry(models.Model):
         on_delete=models.CASCADE,
         related_name='%(class)s',
 
-        null=True,
+        blank=False,
+        null=False,
+    )
+
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.CASCADE,
+        related_name='%(class)s',
+
+        blank=False,
+        null=False,
     )
 
     class Meta:

@@ -112,12 +112,12 @@ class Profile(models.Model):
     INITIAL_DURATION = timedelta(hours=0, minutes=0, seconds=0)
 
     nickname = models.CharField(
-        max_length=20,
+        max_length=NICKNAME_MAX_LENGTH,
 
         blank=True,
         null=True,
     )
-
+    current_language = models.ForeignKey('languages.Language', on_delete=models.SET_NULL, blank=True, null=True)
     reading_time = models.DurationField(default=INITIAL_DURATION)
     listening_time = models.DurationField(default=INITIAL_DURATION)
     srs_time = models.DurationField(default=INITIAL_DURATION)

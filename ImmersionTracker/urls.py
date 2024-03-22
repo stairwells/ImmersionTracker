@@ -6,6 +6,7 @@ urlpatterns = [
 
     path('', include('ImmersionTracker.web.urls')),
     path('accounts/', include('ImmersionTracker.accounts.urls')),
+    path('language/', include('ImmersionTracker.languages.urls')),
     path('media/', include('ImmersionTracker.media.urls')),
     path('entries/', include('ImmersionTracker.immersion_entries.urls')),
 ]
