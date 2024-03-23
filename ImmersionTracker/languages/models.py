@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from ImmersionTracker.accounts.models import Profile
 
@@ -22,15 +24,15 @@ class Language(models.Model):
 
     @property
     def reading_time(self):
-        return sum((entry.time_length for entry in self.readingentry))
+        return sum((entry.time_length for entry in self.readingentry.all()), datetime.timedelta())
 
     @property
     def listening_time(self):
-        return sum((entry.time_length for entry in self.listeningentry))
+        return sum((entry.time_length for entry in self.listeningentry.all()), datetime.timedelta())
 
     @property
     def srs_time(self):
-        return sum((entry.time_length for entry in self.srsentry))
+        return sum((entry.time_length for entry in self.srsentry.all()), datetime.timedelta())
 
     @property
     def total_immersion_time(self):
@@ -38,4 +40,4 @@ class Language(models.Model):
 
     @property
     def total_time(self):
-        return sum((self.reading_time, self.listening_time, self.srs_time))
+        return sum((self.reading_time, self.listening_time, self.srs_time), datetime.timedelta())
