@@ -109,7 +109,6 @@ class ImmersionTrackerUser(auth_models.AbstractBaseUser, auth_models.Permissions
 
 class Profile(models.Model):
     NICKNAME_MAX_LENGTH = 20
-    INITIAL_DURATION = timedelta(hours=0, minutes=0, seconds=0)
 
     nickname = models.CharField(
         max_length=NICKNAME_MAX_LENGTH,
@@ -118,9 +117,6 @@ class Profile(models.Model):
         null=True,
     )
     current_language = models.ForeignKey('languages.Language', on_delete=models.SET_NULL, blank=True, null=True)
-    reading_time = models.DurationField(default=INITIAL_DURATION)
-    listening_time = models.DurationField(default=INITIAL_DURATION)
-    srs_time = models.DurationField(default=INITIAL_DURATION)
 
     user = models.OneToOneField(
         ImmersionTrackerUser,
@@ -130,11 +126,32 @@ class Profile(models.Model):
     )
 
     @property
+    def reading_time(self):
+        return self.current_language.reading_time()
+
+    @property
+    def listening_time(self):
+        return self.current_language.listening_time()
+
+    def srs_time(self):
+        return self.current_language.srs_time()
+
+    @property
     def immersion_time(self):
-        # Returns sum of immersion time, does not include SRS
+        # Returns sum of immersion time for CURRENT LANGUAGE, does not include SRS
         return self.reading_time + self.listening_time
 
     @property
     def total_time(self):
-        # Returns sum of ALL immersion time, including SRS
+        # Returns sum of ALL time for CURRENT LANGUAGE, including SRS
         return sum((self.reading_time, self.listening_time, self.srs_time))
+
+    @property
+    # Returns sum of immersion time for ALL LANGUAGES, does not include SRS
+    def all_languages_total_immersion(self):
+        return sum((lang.total_immersion_time for lang in self.languages))
+
+    @property
+    # Returns sum of ALL time for ALL LANGUAGES, including SRS
+    def all_languages_total_time(self):
+        return sum((lang.total_time for lang in self.languages))
