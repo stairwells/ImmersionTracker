@@ -20,6 +20,7 @@ class ReadingEntryCreateView(AttachProfileAndLanguageMixin, views.CreateView):
 
 class ReadingEntryDetailsView(QuerysetByProfileAndLanguageMixin, views.DetailView):
     template_name = 'immersion_entries/reading/reading_entry_details.html'
+    current_model = ReadingEntry
 
 
 class ReadingEntryEditView(QuerysetByProfileAndLanguageMixin, views.UpdateView):
