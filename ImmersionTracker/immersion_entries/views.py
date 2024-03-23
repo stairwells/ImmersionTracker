@@ -1,23 +1,13 @@
 from django.views import generic as views
 from django.urls import reverse_lazy
 from ImmersionTracker.immersion_entries.models import ReadingEntry, ListeningEntry, SRSEntry
-from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin
-from ImmersionTracker.utils import get_current_profile, get_current_language
+from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
+    GetFilteredQuerysetForContextMixin
 
 
-class AllEntriesView(views.TemplateView):
+class AllEntriesView(GetFilteredQuerysetForContextMixin, views.TemplateView):
     template_name = 'immersion_entries/all_entries.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['listening_entries'] = ListeningEntry.objects.filter(user_profile=get_current_profile(self.request),
-                                                                     language=get_current_language(self.request))
-        context['reading_entries'] = ReadingEntry.objects.filter(user_profile=get_current_profile(self.request),
-                                                                 language=get_current_language(self.request))
-        context['srs_entries'] = SRSEntry.objects.filter(user_profile=get_current_profile(self.request),
-                                                         language=get_current_language(self.request))
-
-        return context
+    models = (ReadingEntry, ListeningEntry, SRSEntry)
 
 
 class ReadingEntryCreateView(AttachProfileAndLanguageMixin, views.CreateView):

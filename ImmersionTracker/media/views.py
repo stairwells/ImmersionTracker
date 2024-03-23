@@ -2,22 +2,13 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 
 from ImmersionTracker.media.models import ListeningMedia, ReadingMedia
-from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin
-from ImmersionTracker.utils import get_current_profile, get_current_language
+from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
+    GetFilteredQuerysetForContextMixin
 
 
-class AllMediaView(views.TemplateView):
+class AllMediaView(GetFilteredQuerysetForContextMixin, views.TemplateView):
     template_name = 'media/all_media.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['reading_media'] = ReadingMedia.objects.filter(user_profile=get_current_profile(self.request),
-                                                               language=get_current_language(self.request))
-        context['listening_media'] = ListeningMedia.objects.filter(user_profile=get_current_profile(self.request),
-                                                                   language=get_current_language(self.request))
-
-        return context
+    models = (ReadingMedia, ListeningMedia)
 
 
 class ReadingMediaCreateView(AttachProfileAndLanguageMixin, views.CreateView):
