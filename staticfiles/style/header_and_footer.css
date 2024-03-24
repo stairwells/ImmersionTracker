@@ -1,0 +1,19 @@
+header, footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.navigation > ul {
+    list-style-type: none;
+}
+
+.go-to-index-btn {
+    flex: 0;
+}

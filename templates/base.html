@@ -1,36 +1,42 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Immersion Tracker</title>
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
 </head>
 <body>
-    <div class="nav-bar">
-        <div class="nav-bar-left"></div>
-        <div class="nav-bar-right">
+    <header>
+        <div class="go-to-index-btn">
+            <a href="{% url 'index' %}"> Home </a>
+        </div>
+        <div class="navigation">
             <ul>
                 {% if request.user.is_authenticated %}
-                    <li>Current Language:
+                    <li><a href="{% url 'all_media' %}"> Media </a></li>
+                    <li><a href="{% url 'all_entries' %}"> Entries </a></li>
+                    <li><a href="{% url 'profile_details' pk=request.user.id %}"> Profile </a></li>
+                {% endif %}
+            </ul>
+            <ul>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'languages_index' %}">Current Language:</a>
                         {% if request.user.profile.current_language %}
                             {{ request.user.profile.current_language.name }}
                         {% else %}
                             None
                         {% endif %}
-                        - <a href="{% url 'language_create' %}"> Add Language</a> -
-                          <a href="{% url 'languages_index' %}"> All Languages </a>
                     </li>
-                    <li><a href="{% url 'all_media' %}"> Media </a></li>
-                    <li><a href="{% url 'all_entries' %}"> Entries </a></li>
-                    <li><a href="{% url 'profile_details' pk=request.user.id %}"> Profile </a></li>
                     <li><a href="{% url 'logout' %}"> Logout </a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}"> Log In </a></li>
                     <li><a href="{% url 'register_account' %}"> Register </a></li>
                 {% endif %}
-                <li><img src="#" alt="prof-pic"></li>
             </ul>
         </div>
-    </div>
+    </header>
     {% block main_content %}
     {% endblock %}
 </body>
