@@ -43,7 +43,7 @@ class ReadingEntry(BaseEntry):
         related_name='entries',
     )
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.media.name}: {self.time_length} ({self.char_length})"
 
 
@@ -54,7 +54,7 @@ class ListeningEntry(BaseEntry):
         related_name='entries',
     )
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.media.name}: {self.time_length}"
 
 
@@ -64,7 +64,7 @@ class SRSEntry(BaseEntry):
         null=True,
     )
 
-    def __repr__(self):
+    def __str__(self):
         s = '' if self.new_cards == 1 else 's'
         return f"{self.time_length} - {self.new_cards} New card{s}"
 

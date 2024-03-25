@@ -155,3 +155,7 @@ class Profile(models.Model):
     # Returns sum of ALL time for ALL LANGUAGES, including SRS
     def all_languages_total_time(self):
         return sum((lang.total_time for lang in self.languages.all()), datetime.timedelta())
+
+    def __str__(self):
+        display_name = self.nickname if self.nickname else self.user.email
+        return f"{display_name}"

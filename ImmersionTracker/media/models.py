@@ -47,7 +47,7 @@ class BaseMedia(models.Model):
         null=False,
     )
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.name} ({self.type}): {self.status}"
 
     class Meta:
