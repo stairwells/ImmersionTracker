@@ -30,6 +30,12 @@ class ReadingEntryEditView(QuerysetByProfileAndLanguageMixin, views.UpdateView):
     current_model = ReadingEntry
 
 
+class ReadingEntryDeleteView(QuerysetByProfileAndLanguageMixin, views.DeleteView):
+    template_name = 'immersion_entries/reading/reading_entry_delete.html'
+    current_model = ReadingEntry
+    success_url = reverse_lazy('all_entries')
+
+
 class ListeningEntryCreateView(AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, views.CreateView):
     fields = ('time_length', 'media',)
     success_url = reverse_lazy('all_entries')
@@ -50,6 +56,12 @@ class ListeningEntryEditView(QuerysetByProfileAndLanguageMixin, views.UpdateView
     current_model = ListeningEntry
 
 
+class ListeningEntryDeleteView(QuerysetByProfileAndLanguageMixin, views.DeleteView):
+    template_name = 'immersion_entries/listening/listening_entry_delete.html'
+    current_model = ListeningEntry
+    success_url = reverse_lazy('all_entries')
+
+
 class SRSEntryCreateView(AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, views.CreateView):
     template_name = 'immersion_entries/srs/srs_entry_create.html'
     fields = ('time_length', 'new_cards',)
@@ -68,3 +80,8 @@ class SRSEntryEditView(QuerysetByProfileAndLanguageMixin, views.UpdateView):
     success_url = reverse_lazy('all_entries')
     current_model = SRSEntry
 
+
+class SRSEntryDeleteView(QuerysetByProfileAndLanguageMixin, views.DeleteView):
+    template_name = 'immersion_entries/srs/srs_entry_delete.html'
+    current_model = SRSEntry
+    success_url = reverse_lazy('all_entries')

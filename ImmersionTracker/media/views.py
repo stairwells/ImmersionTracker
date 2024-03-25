@@ -26,6 +26,17 @@ class ReadingMediaDetailsView(QuerysetByProfileAndLanguageMixin, views.DetailVie
     template_name = 'media/reading_media_details.html'
 
 
+class ReadingMediaEditView(QuerysetByProfileAndLanguageMixin, views.UpdateView):
+    current_model = ReadingMedia
+    template_name = 'media/reading_media_edit.html'
+    success_url = reverse_lazy('all_media')
+
+
+class ReadingMediaDeleteView(QuerysetByProfileAndLanguageMixin, views.DeleteView):
+    current_model = ReadingMedia
+    template_name = 'media/reading_media_delete.html'
+    success_url = reverse_lazy('all_entries')
+
 class ListeningMediaCreateView(AttachProfileAndLanguageMixin, views.CreateView):
     queryset = ListeningMedia.objects.all()
     fields = ('name', 'type', 'link', 'status',)
@@ -39,3 +50,15 @@ class ListeningMediaDetailsView(QuerysetByProfileAndLanguageMixin, views.DetailV
     fields = ('name', 'type', 'link', 'status',)
 
     template_name = 'media/listening_media_details.html'
+
+
+class ListeningMediaEditView(QuerysetByProfileAndLanguageMixin, views.UpdateView):
+    template_name = 'media/listening_media_edit.html'
+    current_model = ListeningMedia
+    success_url = reverse_lazy('all_media')
+
+
+class ListeningMediaDeleteView(QuerysetByProfileAndLanguageMixin, views.DeleteView):
+    template_name = 'media/listening_media_delete.html'
+    current_model = ListeningMedia
+    success_url = reverse_lazy('all_media')

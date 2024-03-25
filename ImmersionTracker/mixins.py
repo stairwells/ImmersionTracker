@@ -1,7 +1,34 @@
+from django.shortcuts import redirect
+
 from ImmersionTracker.utils import get_current_profile, get_current_language
 
 
-class GetFilteredQuerysetForContextMixin:
+class AttachProfileAndLanguageMixin:
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user_profile = get_current_profile(self.request)
+        instance.language = get_current_language(self.request)
+
+        return super().form_valid(form)
+
+class LanguageRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if not get_current_language(request):
+            return redirect('no_current_language')
+
+        return super().dispatch(request, *args, **kwargs)
+
+
+class QuerysetByProfileAndLanguageMixin(LanguageRequiredMixin):
+    current_model = None
+
+    def get_queryset(self):
+        queryset = self.current_model.objects.filter(user_profile=get_current_profile(self.request),
+                                                     language=get_current_language(self.request))
+        return queryset
+
+
+class GetFilteredQuerysetForContextMixin(LanguageRequiredMixin):
 
     def get_filtered_context(self, model):
         data = model.objects.filter(user_profile=get_current_profile(self.request),
@@ -16,19 +43,3 @@ class GetFilteredQuerysetForContextMixin:
             context[model._meta.model_name] = self.get_filtered_context(model)
 
         return context
-
-
-class AttachProfileAndLanguageMixin:
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.user_profile = get_current_profile(self.request)
-        instance.language = get_current_language(self.request)
-
-        return super().form_valid(form)
-
-
-class QuerysetByProfileAndLanguageMixin:
-    def get_queryset(self):
-        queryset = self.current_model.objects.filter(user_profile=get_current_profile(self.request),
-                                                     language=get_current_language(self.request))
-        return queryset

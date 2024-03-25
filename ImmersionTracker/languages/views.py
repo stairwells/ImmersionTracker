@@ -39,3 +39,7 @@ def language_change_current_view(request, pk):
     current_profile.current_language = target_lang
     current_profile.save()
     return redirect('languages_index')
+
+
+class NoCurrentLanguage(views.TemplateView):
+    template_name = 'languages/no_current_language.html'

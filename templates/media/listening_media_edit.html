@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <form action="{% url 'listening_media_edit' pk=object.pk %}" method="post">
+        {{ form.as_p }}
+
+        {% csrf_token %}
+        <button type="submit"> Confirm </button>
+    </form>
+{% endblock %}
