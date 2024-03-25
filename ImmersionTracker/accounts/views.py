@@ -1,15 +1,10 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
-from django.contrib.auth import forms as auth_forms, views as auth_views, get_user_model, logout
+from django.contrib.auth import views as auth_views, logout
 
 from ImmersionTracker.accounts.models import Profile
-
-
-class ImmersionTrackerUserCreationForm(auth_forms.UserCreationForm):
-    class Meta(auth_forms.UserCreationForm.Meta):
-        model = get_user_model()
-        fields = ('email',)
+from ImmersionTracker.accounts.forms import ImmersionTrackerUserCreationForm
 
 
 class RegisterAccountView(views.CreateView):

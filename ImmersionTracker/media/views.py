@@ -37,6 +37,7 @@ class ReadingMediaDeleteView(QuerysetByProfileAndLanguageMixin, views.DeleteView
     template_name = 'media/reading_media_delete.html'
     success_url = reverse_lazy('all_entries')
 
+
 class ListeningMediaCreateView(AttachProfileAndLanguageMixin, views.CreateView):
     queryset = ListeningMedia.objects.all()
     fields = ('name', 'type', 'link', 'status',)

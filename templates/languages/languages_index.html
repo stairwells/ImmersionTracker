@@ -10,4 +10,5 @@
             <p> {{ lang.name }} -<a href="{% url 'language_change_current' pk=lang.pk %}"> Set as current </a></p>
         {% endif %}
     {% endfor %}
+    <p><a href="{% url 'language_create' %}">New Language</a></p>
 {% endblock %}

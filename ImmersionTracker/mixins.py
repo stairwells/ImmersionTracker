@@ -11,6 +11,7 @@ class AttachProfileAndLanguageMixin:
 
         return super().form_valid(form)
 
+
 class LanguageRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         if not get_current_language(request):
