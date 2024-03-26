@@ -31,16 +31,18 @@ class QuerysetByProfileAndLanguageMixin(LanguageRequiredMixin):
 
 class GetFilteredQuerysetForContextMixin(LanguageRequiredMixin):
 
-    def get_filtered_context(self, model):
-        data = model.objects.filter(user_profile=get_current_profile(self.request),
-                                    language=get_current_language(self.request))
+    def get_filtered_context(self, model, profile, lang):
+        data = model.objects.filter(user_profile=profile,
+                                    language=lang)
 
         return data
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        profile = get_current_profile(self.request)
+        lang = get_current_language(self.request)
 
         for model in self.models:
-            context[model._meta.model_name] = self.get_filtered_context(model)
+            context[model._meta.model_name] = self.get_filtered_context(model, profile, lang)
 
         return context

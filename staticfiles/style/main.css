@@ -1,6 +1,13 @@
 body {
-    background-color: #14233a;
-    color: #f1f6f0;
+    background-color: #2E2836;
+    color: #FCF7FF;
+
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 a {

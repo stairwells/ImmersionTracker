@@ -13,14 +13,14 @@
             <a href="{% url 'index' %}"> Home </a>
         </div>
         <div class="navigation">
-            <ul>
+            <ul class="header-nav user-info">
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'all_media' %}"> Media </a></li>
                     <li><a href="{% url 'all_entries' %}"> Entries </a></li>
                     <li><a href="{% url 'profile_details' pk=request.user.id %}"> Profile </a></li>
                 {% endif %}
             </ul>
-            <ul>
+            <ul class="header-nav logout-and-language">
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'languages_index' %}">Current Language:</a>
                         {% if request.user.profile.current_language %}

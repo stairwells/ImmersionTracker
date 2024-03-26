@@ -1,0 +1,81 @@
+.profile-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-details-box {
+    width: 600px;
+    border-radius: 20px;
+}
+
+.profile-details-and-picture {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-picture-wrapper {
+    flex: 1;
+    width: 50%;
+    padding: 1em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-picture {
+    height: 300px;
+    border: 1px solid #FCF7FF;
+
+    margin-bottom: 3em;
+}
+
+.profile-details {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding-bottom: 0.5em;
+}
+
+.profile-details div:last-child {
+    border: 0;
+}
+
+.profile-details-fieldset {
+    padding: 1.5em;
+    background-color: #3d324a;
+    border-radius: 20px;
+}
+
+.profile-details-fieldset > legend {
+    font-size: x-large;
+}
+
+.profile-details-label {
+    font-size: x-large;
+}
+
+.profile-details-value {
+    font-size: 1.2em;
+
+    padding: 0.5em 0 0.3em 0.5em;
+}
+
+.profile-details-field {
+    border-bottom: 1px solid #FCF7FF;
+}
+
+.profile-after-details-options {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    border-top: 1px solid #FCF7FF;
+}

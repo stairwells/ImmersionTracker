@@ -1,15 +1,47 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div>Nickname: {{ object.nickname }}</div>
-    {% if request.user.profile.current_language %}
-        <div>Reading Time: {{ object.reading_time }}</div>
-        <div>Listening Time: {{ object.listening_time }}</div>
-        <div>SRS Time: {{ object.srs_time }}</div>
-        <div>Total immersion Time: {{ object.immersion_time }}</div>
-    {% else %}
-        <p> Please create or set a language to see info about immersion time </p>
-    {% endif %}
+    <div class="profile-details-wrapper">
+        <div class="profile-details-box">
+        <fieldset class="profile-details-fieldset">
+            <legend> Profile Details </legend>
+            <div class="profile-details-and-picture">
+                <div class="profile-details">
+                    <div class="profile-details-field">
+                        <div class="profile-details-label"> Nickname </div>
+                        <div class="profile-details-value">{{ object.nickname }}</div>
+                    </div>
+                    {% if request.user.profile.current_language %}
+                        <div class="profile-details-field">
+                            <div class="profile-details-label"> Reading Time </div>
+                            <div class="profile-details-value">{{ object.reading_time }}</div>
+                        </div>
+                        <div class="profile-details-field">
+                            <div class="profile-details-label"> Listening Time </div>
+                            <div class="profile-details-value">{{ object.listening_time }}</div>
+                        </div>
+                        <div class="profile-details-field">
+                            <div class="profile-details-label"> SRS Time </div>
+                            <div class="profile-details-value">{{ object.srs_time }}</div>
+                        </div>
+                        <div class="profile-details-field">
+                            <div class="profile-details-label"> Total Immersion Time </div>
+                            <div class="profile-details-value">{{ object.immersion_time }}</div>
+                        </div>
+                    {% else %}
+                        <div> Please create or set a language to see info about immersion time </div>
+                    {% endif %}
+                </div>
+                <div class="profile-picture-wrapper">
+                    <div class="profile-picture"></div>
+                </div>
+            </div>
+            <div class="profile-after-details-options">
+                <a href="{% url 'edit_profile' pk=request.user.id %}"> Edit </a>
+            </div>
+            </fieldset>
+        </div>
+    </div>
 
-    <a href="{% url 'edit_profile' pk=request.user.id %}"> Edit </a>
+
 {% endblock %}

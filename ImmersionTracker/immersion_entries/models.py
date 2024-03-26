@@ -36,7 +36,12 @@ class BaseEntry(models.Model):
 
 
 class ReadingEntry(BaseEntry):
-    char_length = models.IntegerField(default=None)
+    char_length = models.IntegerField(
+        default=None,
+
+        null=True,
+        blank=True,
+    )
     media = models.ForeignKey(
         ReadingMedia,
         on_delete=models.DO_NOTHING,

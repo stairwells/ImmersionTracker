@@ -1,6 +1,13 @@
 header, footer {
+    background-color: #3d324a;
+    font-size: larger;
+    height: 60px;
+
+    box-shadow: 1px 0 1px black;
+
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .navigation {
@@ -10,10 +17,31 @@ header, footer {
     flex: 1;
 }
 
-.navigation > ul {
+.header-nav {
+    margin: 1em 0 1em 0;
+    padding: 0 1em 0 1em;
+
     list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.header-nav > li {
+    padding: 0.5em 0.8em 0.5em 0.8em
+}
+
+.header-nav > li:hover {
+    background-color: #4f3f66;
 }
 
 .go-to-index-btn {
     flex: 0;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-right: 0.5em;
+    border-right: 0.1em solid #f1f6f0;
+}
+
+.go-to-index-btn:hover {
+    background-color: #4f3f66;
 }

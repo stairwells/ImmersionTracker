@@ -1,6 +1,14 @@
+import datetime
+
 from django.db import models
 from ImmersionTracker.languages.models import Language
 from ImmersionTracker.accounts.models import Profile
+
+
+class MediaStatusMixin(models.Model):
+
+    class Meta:
+        abstract = True
 
 
 class BaseMedia(models.Model):
@@ -24,9 +32,6 @@ class BaseMedia(models.Model):
     link = models.URLField(
         blank=True,
         null=True,
-    )
-
-    status = models.CharField(
     )
 
     language = models.ForeignKey(
@@ -55,7 +60,6 @@ class BaseMedia(models.Model):
 
 
 class ReadingMedia(BaseMedia):
-
     STATUS_MAX_LENGTH = 10
     STATUS_READING = 'Reading'
     STATUS_COMPLETED = 'Completed'
@@ -74,8 +78,12 @@ class ReadingMedia(BaseMedia):
         choices=STATUS_CHOICES,
     )
 
-class ListeningMedia(BaseMedia):
+    @property
+    def immersion_time(self):
+        return sum((entry.time_length for entry in self.entries.all()), datetime.timedelta())
 
+
+class ListeningMedia(BaseMedia):
     STATUS_MAX_LENGTH = 10
     STATUS_LISTENING = 'Listening'
     STATUS_COMPLETED = 'Completed'
@@ -93,3 +101,7 @@ class ListeningMedia(BaseMedia):
         max_length=STATUS_MAX_LENGTH,
         choices=STATUS_CHOICES,
     )
+
+    @property
+    def immersion_time(self):
+        return sum((entry.time_length for entry in self.entries.all()), datetime.timedelta())
