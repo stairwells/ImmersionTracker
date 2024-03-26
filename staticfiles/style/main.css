@@ -1,5 +1,5 @@
 body {
-    background-color: #2E2836;
+    background-color: #14142e;
     color: #FCF7FF;
 
     height: 100vh;
@@ -17,4 +17,9 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.base-wrapper {
+    flex: 1;
+    display: flex;
 }

@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <title>Immersion Tracker</title>
     <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
@@ -37,7 +41,12 @@
             </ul>
         </div>
     </header>
-    {% block main_content %}
-    {% endblock %}
+    <div class="base-wrapper">
+        {% block main_content %}
+        {% endblock %}
+    </div>
+    <footer class="footer">
+        <p class="credit">By Alex Gospodinov</p>
+    </footer>
 </body>
 </html>

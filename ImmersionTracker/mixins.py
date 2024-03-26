@@ -30,7 +30,6 @@ class QuerysetByProfileAndLanguageMixin(LanguageRequiredMixin):
 
 
 class GetFilteredQuerysetForContextMixin(LanguageRequiredMixin):
-
     def get_filtered_context(self, model, profile, lang):
         data = model.objects.filter(user_profile=profile,
                                     language=lang)

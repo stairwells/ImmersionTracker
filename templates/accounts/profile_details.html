@@ -1,47 +1,28 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div class="profile-details-wrapper">
-        <div class="profile-details-box">
-        <fieldset class="profile-details-fieldset">
-            <legend> Profile Details </legend>
-            <div class="profile-details-and-picture">
-                <div class="profile-details">
-                    <div class="profile-details-field">
-                        <div class="profile-details-label"> Nickname </div>
-                        <div class="profile-details-value">{{ object.nickname }}</div>
-                    </div>
-                    {% if request.user.profile.current_language %}
-                        <div class="profile-details-field">
-                            <div class="profile-details-label"> Reading Time </div>
-                            <div class="profile-details-value">{{ object.reading_time }}</div>
-                        </div>
-                        <div class="profile-details-field">
-                            <div class="profile-details-label"> Listening Time </div>
-                            <div class="profile-details-value">{{ object.listening_time }}</div>
-                        </div>
-                        <div class="profile-details-field">
-                            <div class="profile-details-label"> SRS Time </div>
-                            <div class="profile-details-value">{{ object.srs_time }}</div>
-                        </div>
-                        <div class="profile-details-field">
-                            <div class="profile-details-label"> Total Immersion Time </div>
-                            <div class="profile-details-value">{{ object.immersion_time }}</div>
-                        </div>
-                    {% else %}
-                        <div> Please create or set a language to see info about immersion time </div>
-                    {% endif %}
-                </div>
-                <div class="profile-picture-wrapper">
-                    <div class="profile-picture"></div>
+    <div class="profile-wrapper">
+        <div class="profile-picture-and-nickname">
+            <div class="profile-picture">
+            </div>
+            <div class="nickname-display">
+                {{ object.nickname }}
+            </div>
+            <div class="email-display">
+                {{ request.user.email }}
+            </div>
+            <a href="{% url 'edit_profile' pk=object.pk %}" class="edit-profile-btn">Edit Profile</a>
+        </div>
+        <div class="profile-details-and-options">
+            <div class="profile-details">
+                <div class="immersion-info">
+                    <div class="immersion-info-label"> IMMERSION INFO</div>
+                    <div class="profile-details-value">Reading Time: {{ object.reading_time }}</div>
+                    <div class="profile-details-value">Listening Time: {{ object.listening_time }}</div>
+                    <div class="profile-details-value">SRS Time: {{ object.srs_time }}</div>
+                    <div class="profile-details-value">Total Immersion Time: {{ object.immersion_time }}</div>
                 </div>
             </div>
-            <div class="profile-after-details-options">
-                <a href="{% url 'edit_profile' pk=request.user.id %}"> Edit </a>
-            </div>
-            </fieldset>
         </div>
     </div>
-
-
 {% endblock %}
