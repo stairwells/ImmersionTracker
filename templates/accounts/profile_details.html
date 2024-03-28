@@ -11,16 +11,21 @@
             <div class="email-display">
                 {{ request.user.email }}
             </div>
-            <a href="{% url 'edit_profile' pk=object.pk %}" class="edit-profile-btn">Edit Profile</a>
+            <a href="{% url 'profile_edit' pk=object.pk %}" class="edit-profile-btn">Edit Profile</a>
+            <a href="{% url 'account_delete' pk=object.pk %}" class="edit-profile-btn">Delete Account</a>
         </div>
         <div class="profile-details-and-options">
             <div class="profile-details">
                 <div class="immersion-info">
                     <div class="immersion-info-label"> IMMERSION INFO</div>
-                    <div class="profile-details-value">Reading Time: {{ object.reading_time }}</div>
-                    <div class="profile-details-value">Listening Time: {{ object.listening_time }}</div>
-                    <div class="profile-details-value">SRS Time: {{ object.srs_time }}</div>
-                    <div class="profile-details-value">Total Immersion Time: {{ object.immersion_time }}</div>
+                    {% if request.user.profile.current_language %}
+                        <div class="profile-details-value">Reading Time: {{ object.reading_time }}</div>
+                        <div class="profile-details-value">Listening Time: {{ object.listening_time }}</div>
+                        <div class="profile-details-value">SRS Time: {{ object.srs_time }}</div>
+                        <div class="profile-details-value">Total Immersion Time: {{ object.immersion_time }}</div>
+                    {% else %}
+                        <div class="new-current-language-message">No current language set, no info to display</div>
+                    {% endif %}
                 </div>
             </div>
         </div>

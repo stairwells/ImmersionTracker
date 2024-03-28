@@ -1,4 +1,5 @@
 @import "main.css";
-@import "header_and_footer.css";
+@import "header_footer_and_sidebar.css";
 @import "profile_details.css";
-
+@import "all_entries.css";
+@import "all_media.css";

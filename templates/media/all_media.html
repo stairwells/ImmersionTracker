@@ -1,19 +1,52 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    {% for media in readingmedia %}
-        <p> {{ media }} </p>
-        <a href="{% url 'reading_media_details' pk=media.pk %}">Details</a>
-        <a href="{% url 'reading_media_edit' pk=media.pk %}"> Edit</a>
-        <a href="{% url 'reading_media_delete' pk=media.pk %}"> Delete</a>
-    {% endfor %}
-    <p><a href="{% url 'reading_media_create' %}"> New reading media </a></p>
-
-    {% for media in listeningmedia %}
-        <p> {{ media }} </p>
-        <a href="{% url 'listening_media_details' pk=media.pk %}">Details</a>
-        <a href="{% url 'listening_media_edit' pk=media.pk %}"> Edit</a>
-        <a href="{% url 'listening_media_delete' pk=media.pk %}"> Delete</a>
-    {% endfor %}
-    <a href="{% url 'listening_media_create' %}">New Listening Media</a>
+<div class="media-wrapper">
+    <div class="media-category-box">
+        <div class="media-category-label"> Reading Media </div>
+        <hr>
+        <div class="media-grid-container reading">
+            <div class="media-grid"> Name </div>
+                <div class="media-grid"> Type </div>
+                <div class="media-grid"> Link </div>
+                <div class="media-grid"> Status </div>
+                <div class="media-grid"> Options </div>
+            {% for media in readingmedia %}
+                <div class="media-grid"> {{ media.name }}</div>
+                <div class="media-grid"> {{ media.type }}</div>
+                <div class="media-grid"> {{ media.link }}</div>
+                <div class="media-grid"> {{ media.status }}</div>
+                <div class="media-grid">
+                    <a href="{% url 'reading_media_details' pk=media.pk %}"> Details </a>
+                    <a href="{% url 'reading_media_edit' pk=media.pk %}"> Edit </a>
+                    <a href="{% url 'reading_media_delete' pk=media.pk %}"> Delete </a>
+                </div>
+            {% endfor %}
+        </div>
+        <p><a href="{% url 'reading_media_create' %}"> New reading media </a></p>
+    </div>
+    <div class="media-category-box">
+        <div class="media-category-label"> Listening Media </div>
+        <hr>
+        <div class="media-grid-container reading">
+            <div class="media-grid"> Name </div>
+                <div class="media-grid"> Type </div>
+                <div class="media-grid"> Link </div>
+                <div class="media-grid"> Status </div>
+                <div class="media-grid"> Options </div>
+            {% for media in listeningmedia %}
+                <div class="media-grid"> {{ media.name }}</div>
+                <div class="media-grid"> {{ media.type }}</div>
+                <div class="media-grid"> {{ media.link }}</div>
+                <div class="media-grid"> {{ media.status }}</div>
+                <div class="media-grid">
+                    <a href="{% url 'listening_media_details' pk=media.pk %}"> Details </a>
+                    <a href="{% url 'listening_media_edit' pk=media.pk %}"> Edit </a>
+                    <a href="{% url 'listening_media_delete' pk=media.pk %}"> Delete </a>
+                </div>
+            {% endfor %}
+        </div>
+        <p><a href="{% url 'listening_media_create' %}"> New Listening Media </a></p>
+    </div>
+</div>
 {% endblock %}

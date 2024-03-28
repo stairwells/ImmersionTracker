@@ -17,13 +17,6 @@
             <a href="{% url 'index' %}"> Home </a>
         </div>
         <div class="navigation">
-            <ul class="header-nav user-info">
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'all_media' %}"> Media </a></li>
-                    <li><a href="{% url 'all_entries' %}"> Entries </a></li>
-                    <li><a href="{% url 'profile_details' pk=request.user.id %}"> Profile </a></li>
-                {% endif %}
-            </ul>
             <ul class="header-nav logout-and-language">
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'languages_index' %}">Current Language:</a>
@@ -42,6 +35,15 @@
         </div>
     </header>
     <div class="base-wrapper">
+    <div class="sidebar">
+        <ul class="sidebar-buttons">
+            {% if request.user.is_authenticated %}
+                <li class="sidebar-button"><a href="{% url 'all_media' %}"><span>Media</span> </a></li>
+                <li class="sidebar-button"><a href="{% url 'all_entries' %}"><span>Entries</span></a></li>
+                <li class="sidebar-button"><a href="{% url 'profile_details' pk=request.user.id %}"><span>Profile</span></a></li>
+            {% endif %}
+        </ul>
+    </div>
         {% block main_content %}
         {% endblock %}
     </div>

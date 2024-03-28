@@ -1,27 +1,72 @@
 {% extends 'base.html' %}
 
+
 {% block main_content %}
-    {% for entry in readingentry %}
-        <p> {{ entry }} - </p>
-        <a href="{% url 'reading_entry_details' pk=entry.pk %}"> Details </a>
-        <a href="{% url 'reading_entry_edit' pk=entry.pk %}"> Edit </a>
-        <a href="{% url 'reading_entry_delete' pk=entry.pk %}"> Delete </a>
-    {% endfor %}
-    <p><a href="{% url 'reading_entry_create' %}"> New reading entry </a></p>
-
-    {% for entry in listeningentry %}
-        <p> {{ entry }} - </p>
-        <a href="{% url 'listening_entry_details' pk=entry.pk %}"> Details </a>
-        <a href="{% url 'listening_entry_edit' pk=entry.pk %}"> Edit </a>
-        <a href="{% url 'listening_entry_delete' pk=entry.pk %}"> Delete </a>
-    {% endfor %}
-    <p><a href="{% url 'listening_entry_create' %}"> New listening entry </a></p>
-
-    {% for entry in srsentry %}
-        <p> {{ entry }} - </p>
-        <a href="{% url 'srs_entry_details' pk=entry.pk %}"> Details </a>
-        <a href="{% url 'srs_entry_edit' pk=entry.pk %}"> Edit </a>
-        <a href="{% url 'srs_entry_delete' pk=entry.pk %}"> Delete </a>
-    {% endfor %}
-    <p><a href="{% url 'srs_entry_create' %}"> New SRS entry </a></p>
+<div class="entries-wrapper">
+    <div class="entry-category-box">
+        <div class="entry-category-label"> Reading Entries </div>
+        <hr>
+        <div class="entry-grid-container reading">
+            <div class="entry-grid"> Date </div>
+                <div class="entry-grid"> Length </div>
+                <div class="entry-grid"> Characters </div>
+                <div class="entry-grid"> Media </div>
+                <div class="entry-grid"> Options </div>
+            {% for entry in readingentry %}
+                <div class="entry-grid"> {{ entry.created_on }}</div>
+                <div class="entry-grid"> {{ entry.time_length }}</div>
+                <div class="entry-grid"> {{ entry.char_length }}</div>
+                <div class="entry-grid"> {{ entry.media }}</div>
+                <div class="entry-grid">
+                    <a href="{% url 'reading_entry_details' pk=entry.pk %}"> Details </a>
+                    <a href="{% url 'reading_entry_edit' pk=entry.pk %}"> Edit </a>
+                    <a href="{% url 'reading_entry_delete' pk=entry.pk %}"> Delete </a>
+                </div>
+            {% endfor %}
+        </div>
+        <p><a href="{% url 'reading_entry_create' %}"> New reading entry </a></p>
+    </div>
+    <div class="entry-category-box">
+        <div class="entry-category-label"> Listening Entries </div>
+        <hr>
+        <div class="entry-grid-container listening-srs">
+            <div class="entry-grid entry-date"> Date </div>
+                <div class="entry-grid entry-time-length"> Length </div>
+                <div class="entry-grid entry-media"> Media </div>
+                <div class="entry-grid entry-details"> Options </div>
+            {% for entry in listeningentry %}
+                <div class="entry-grid entry-date"> {{ entry.created_on }}</div>
+                <div class="entry-grid entry-time-length"> {{ entry.time_length }}</div>
+                <div class="entry-grid entry-media"> {{ entry.media }}</div>
+                <div class="entry-grid entry-details">
+                    <a href="{% url 'listening_entry_details' pk=entry.pk %}"> Details </a>
+                    <a href="{% url 'listening_entry_edit' pk=entry.pk %}"> Edit </a>
+                    <a href="{% url 'listening_entry_delete' pk=entry.pk %}"> Delete </a>
+                </div>
+            {% endfor %}
+        <p><a href="{% url 'listening_entry_create' %}"> New listening entry </a></p>
+    </div>
+    <div class="entry-category-box">
+        <div class="entry-category-label"> SRS Entries </div>
+        <hr>
+        <div class="entry-grid-container listening-srs">
+            <div class="entry-grid entry-date"> Date </div>
+                <div class="entry-grid entry-time-length"> Length </div>
+                <div class="entry-grid entry-new-cards"> New Cards </div>
+                <div class="entry-grid entry-details"> Options </div>
+            {% for entry in srsentry %}
+                <div class="entry-grid entry-date"> {{ entry.created_on }}</div>
+                <div class="entry-grid entry-time-length"> {{ entry.time_length }}</div>
+                <div class="entry-grid entry-new-cards"> {{ entry.new_cards }}</div>
+                <div class="entry-grid entry-details">
+                    <a href="{% url 'srs_entry_details' pk=entry.pk %}"> Details </a>
+                    <a href="{% url 'srs_entry_edit' pk=entry.pk %}"> Edit </a>
+                    <a href="{% url 'srs_entry_delete' pk=entry.pk %}"> Delete </a>
+                </div>
+            {% endfor %}
+        <p><a href="{% url 'srs_entry_create' %}"> New SRS entry </a></p>
+        </div>
+    </div>
+</div>
+</div>
 {% endblock %}

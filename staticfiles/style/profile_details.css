@@ -10,6 +10,8 @@
 
     background-color: #e1e1eb;
     color: #14142e;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 
     margin: 5em 0 5em 0;
     padding: 2em 20em 0 20em;
