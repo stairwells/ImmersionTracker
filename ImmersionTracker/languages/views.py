@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.shortcuts import redirect
 from django.views import generic as views
 from django.urls import reverse_lazy
@@ -17,7 +20,7 @@ class LanguagesIndexView(views.TemplateView):
         return context
 
 
-class LanguageCreateView(views.CreateView):
+class LanguageCreateView(LoginRequiredMixin, views.CreateView):
     queryset = Language.objects.all()
     template_name = 'languages/language_create.html'
     fields = ('name',)
@@ -32,6 +35,7 @@ class LanguageCreateView(views.CreateView):
         return super().form_valid(form)
 
 
+@login_required
 def language_change_current_view(request, pk):
     current_profile = get_current_profile(request)
     target_lang = Language.objects.get(pk=pk)
@@ -41,5 +45,5 @@ def language_change_current_view(request, pk):
     return redirect('languages_index')
 
 
-class NoCurrentLanguage(views.TemplateView):
+class NoCurrentLanguage(LoginRequiredMixin, views.TemplateView):
     template_name = 'languages/no_current_language.html'

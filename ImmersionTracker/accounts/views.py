@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -20,18 +23,19 @@ class LoginView(auth_views.LoginView):
     success_url = reverse_lazy('index')
 
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('index')
 
 
-class ProfileDetailsView(views.DetailView):
+class ProfileDetailsView(LoginRequiredMixin, views.DetailView):
     queryset = Profile.objects.all()
 
     template_name = 'accounts/profile_details.html'
 
 
-class ProfileEditView(views.UpdateView):
+class ProfileEditView(LoginRequiredMixin, views.UpdateView):
     queryset = Profile.objects.all()
 
     template_name = 'accounts/profile_edit.html'
@@ -39,7 +43,7 @@ class ProfileEditView(views.UpdateView):
     success_url = reverse_lazy('index')
 
 
-class DeleteAccountView(views.DeleteView):
+class DeleteAccountView(LoginRequiredMixin, views.DeleteView):
     queryset = get_user_model().object.all()
     template_name = 'accounts/profile_delete.html'
     success_url = reverse_lazy('index')

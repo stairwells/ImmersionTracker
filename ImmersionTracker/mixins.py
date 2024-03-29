@@ -45,3 +45,11 @@ class GetFilteredQuerysetForContextMixin(LanguageRequiredMixin):
             context[model._meta.model_name] = self.get_filtered_context(model, profile, lang)
 
         return context
+
+
+class FormMediaChoicesMustBeOwnedByCurrentUserMixin:
+    def get_form_class(self):
+        form = super().get_form_class()
+        form.base_fields['media'].limit_choices_to = {'user_profile': get_current_profile(self.request)}
+
+        return form
