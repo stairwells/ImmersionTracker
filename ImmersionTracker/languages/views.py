@@ -9,6 +9,11 @@ from ImmersionTracker.utils import get_current_profile, get_current_language
 from ImmersionTracker.languages.models import Language
 
 
+def set_current_lang(profile, lang):
+    profile.current_language = lang
+    profile.save()
+
+
 class LanguagesIndexView(views.TemplateView):
     template_name = 'languages/languages_index.html'
 
@@ -40,8 +45,7 @@ def language_change_current_view(request, pk):
     current_profile = get_current_profile(request)
     target_lang = Language.objects.get(pk=pk)
 
-    current_profile.current_language = target_lang
-    current_profile.save()
+    set_current_lang(current_profile, target_lang)
     return redirect('languages_index')
 
 

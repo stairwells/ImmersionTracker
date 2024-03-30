@@ -75,8 +75,8 @@ class ListeningEntryDeleteView(LoginRequiredMixin, QuerysetByProfileAndLanguageM
     success_url = reverse_lazy('all_entries')
 
 
-class SRSEntryCreateView(LoginRequiredMixin, FormMediaChoicesMustBeOwnedByCurrentUserMixin,
-                         AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, views.CreateView):
+class SRSEntryCreateView(LoginRequiredMixin, AttachProfileAndLanguageMixin,
+                         QuerysetByProfileAndLanguageMixin, views.CreateView):
     template_name = 'immersion_entries/srs/srs_entry_create.html'
     form_class = SRSEntryForm
     success_url = reverse_lazy('all_entries')

@@ -3,7 +3,12 @@
 
 {% block main_content %}
 <div class="entries-wrapper">
-    <div class="entry-category-box">
+    <div class="entry-category-tabs-wrapper">
+        <div class="entry-category-tab">Reading</div>
+        <div class="entry-category-tab">Listening</div>
+        <div class="entry-category-tab">SRS</div>
+    </div>
+    <div class="entry-category-box" id="reading">
         <div class="entry-category-label"> Reading Entries </div>
         <hr>
         <div class="entry-grid-container reading">
@@ -26,7 +31,7 @@
         </div>
         <p><a href="{% url 'reading_entry_create' %}"> New reading entry </a></p>
     </div>
-    <div class="entry-category-box">
+    <div class="entry-category-box" id="listening">
         <div class="entry-category-label"> Listening Entries </div>
         <hr>
         <div class="entry-grid-container listening-srs">
@@ -46,7 +51,8 @@
             {% endfor %}
         <p><a href="{% url 'listening_entry_create' %}"> New listening entry </a></p>
     </div>
-    <div class="entry-category-box">
+    </div>
+    <div class="entry-category-box" id="srs">
         <div class="entry-category-label"> SRS Entries </div>
         <hr>
         <div class="entry-grid-container listening-srs">
@@ -67,6 +73,5 @@
         <p><a href="{% url 'srs_entry_create' %}"> New SRS entry </a></p>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

@@ -3,6 +3,33 @@
     padding-left: 20px;
 }
 
+.entry-category-tabs-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 5em;
+    width: 100%;
+
+    margin-top: 1em;
+}
+
+.entry-category-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: x-large;
+    font-weight: bold;
+
+    padding: 1.5em;
+}
+
+.entry-category-tab:hover {
+    background-color: #e1e1eb;
+    color: #14142e;
+
+    cursor: pointer;
+}
+
 .entry-category-box {
     width: 100%;
 }
@@ -43,4 +70,8 @@ width: 90%;
 
     border-bottom: 1px solid #14142e;
     padding: 0.2em 0.5em;
+}
+
+#listening, #srs {
+    display: none;
 }

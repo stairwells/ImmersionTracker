@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <header>
@@ -19,12 +18,13 @@
         <div class="navigation">
             <ul class="header-nav logout-and-language">
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'languages_index' %}">Current Language:</a>
+                    <li><a href="{% url 'languages_index' %}">Current Language:
                         {% if request.user.profile.current_language %}
                             {{ request.user.profile.current_language.name }}
                         {% else %}
                             None
                         {% endif %}
+                        </a>
                     </li>
                     <li><a href="{% url 'logout' %}"> Logout </a></li>
                 {% else %}
@@ -50,5 +50,6 @@
     <footer class="footer">
         <p class="credit">By Alex Gospodinov</p>
     </footer>
+<script src="{% static 'js/entry_tabs.js' %}"></script>
 </body>
 </html>

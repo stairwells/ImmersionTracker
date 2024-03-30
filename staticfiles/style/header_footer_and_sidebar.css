@@ -44,7 +44,8 @@ header, footer {
 }
 
 .header-nav > li:hover {
-    background-color: #4f3f66;
+    background-color: #14142e;
+    color: #e1e1eb;
 }
 
 .go-to-index-btn {
@@ -55,7 +56,8 @@ header, footer {
 }
 
 .go-to-index-btn:hover {
-    background-color: #4f3f66;
+    background-color: #14142e;
+    color: #e1e1eb;
 }
 
 .sidebar {
