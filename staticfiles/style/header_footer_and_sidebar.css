@@ -74,6 +74,18 @@ header, footer {
     text-transform: uppercase;
 }
 
+.sidebar-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.sidebar-button-wrapper > img {
+    box-sizing: border-box;
+    height: 2em;
+    padding-left: 3em;
+}
+
 .sidebar-button {
     width: 100%;
     height: 3em;

@@ -30,6 +30,7 @@ class ReadingMediaDetailsView(LoginRequiredMixin, QuerysetByProfileAndLanguageMi
 
 class ReadingMediaEditView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.UpdateView):
     current_model = ReadingMedia
+    fields = ('name', 'type', 'link', 'status',)
     template_name = 'media/reading_media_edit.html'
     success_url = reverse_lazy('all_media')
 
@@ -37,7 +38,7 @@ class ReadingMediaEditView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin
 class ReadingMediaDeleteView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DeleteView):
     current_model = ReadingMedia
     template_name = 'media/reading_media_delete.html'
-    success_url = reverse_lazy('all_entries')
+    success_url = reverse_lazy('all_media')
 
 
 class ListeningMediaCreateView(LoginRequiredMixin, AttachProfileAndLanguageMixin, views.CreateView):
@@ -58,6 +59,7 @@ class ListeningMediaDetailsView(LoginRequiredMixin, QuerysetByProfileAndLanguage
 class ListeningMediaEditView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.UpdateView):
     template_name = 'media/listening_media_edit.html'
     current_model = ListeningMedia
+    fields = ('name', 'type', 'link', 'status',)
     success_url = reverse_lazy('all_media')
 
 
