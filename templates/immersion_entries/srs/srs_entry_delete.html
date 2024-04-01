@@ -3,8 +3,6 @@
 {% block main_content %}
     <p> Are you sure you want to delete {{ object }}?</p>
     <form action="{% url 'srs_entry_delete' pk=object.pk %}" method="post"> {% csrf_token %}
-        {{ form }}
-
         <button type="submit"> Confirm </button>
     </form>
 {% endblock %}

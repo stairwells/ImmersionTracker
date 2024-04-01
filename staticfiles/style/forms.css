@@ -1,0 +1,32 @@
+.form-wrapper {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-wrapper > form {
+    display: flex;
+    flex-direction: column;
+
+    background-color: #e1e1eb;
+    color: #14142e;
+
+    padding: 1em 0.8em;
+    gap: 1em;
+
+    font-size: x-large;
+}
+
+.form-wrapper > form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+}
+
+.form-wrapper > form > button {
+    width: 50%;
+    height: 3em;
+    margin-left: 25%;
+}
