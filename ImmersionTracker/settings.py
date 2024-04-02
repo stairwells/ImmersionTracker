@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ImmersionTracker.immersion_entries.apps.ImmersionEntriesConfig',
     'ImmersionTracker.web.apps.WebConfig',
     'ImmersionTracker.media.apps.MediaConfig',
+    'ImmersionTracker.goals.apps.GoalsConfig',
 ]
 
 MIDDLEWARE = [

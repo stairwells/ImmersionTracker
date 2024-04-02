@@ -10,6 +10,7 @@ class ReadingEntryForm(ModelForm):
         model = ReadingEntry
         fields = ('time_length', 'char_length', 'media',)
 
+
 class ListeningEntryForm(ModelForm):
     class Meta:
         model = ListeningEntry
