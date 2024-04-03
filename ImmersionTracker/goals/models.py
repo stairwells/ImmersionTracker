@@ -17,6 +17,7 @@ class BaseGoal(models.Model):
     language = models.ForeignKey(
         'languages.Language',
         on_delete=models.CASCADE,
+        related_name='%(class)s',
 
         blank=False,
         null=False,
@@ -76,7 +77,7 @@ class ReadingGoal(BaseGoal):
 
     @property
     def current_status(self):
-        if date.today() > self.due_date:
+        if date.today() < self.due_date:
             return "In Progress"
 
         return self.is_complete
@@ -98,7 +99,7 @@ class ListeningGoal(BaseGoal):
 
     @property
     def current_status(self):
-        if date.today() > self.due_date:
+        if date.today() < self.due_date:
             return "In Progress"
 
         return self.is_complete
@@ -120,7 +121,7 @@ class SRSGoal(BaseGoal):
 
     @property
     def current_status(self):
-        if date.today() > self.due_date:
+        if date.today() < self.due_date:
             return "In Progress"
 
         return self.is_complete

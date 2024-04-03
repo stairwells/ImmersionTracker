@@ -9,5 +9,5 @@ urlpatterns = [
     path('language/', include('ImmersionTracker.languages.urls')),
     path('media/', include('ImmersionTracker.media.urls')),
     path('entries/', include('ImmersionTracker.immersion_entries.urls')),
-    path('goals/',include('ImmersionTracker.goals.urls')),
+    path('goals/', include('ImmersionTracker.goals.urls')),
 ]

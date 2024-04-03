@@ -56,6 +56,14 @@
                 </li>
                 <li class="sidebar-button">
                     <div class="sidebar-button-wrapper">
+                        <img class="sidebar-icon" src="{% static 'icons/goal.svg' %}" alt="goal-icon">
+                        <div class="sidebar-button-link">
+                            <a href="{% url 'all_goals' %}">goals</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="sidebar-button">
+                    <div class="sidebar-button-wrapper">
                         <img class="sidebar-icon" src="{% static 'icons/profile.svg' %}" alt="profile-icon">
                         <div class="sidebar-button-link">
                             <a href="{% url 'profile_details' pk=request.user.id %}">profile</a>

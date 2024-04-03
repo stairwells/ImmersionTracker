@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <div class="goals-wrapper">
+    <div class="category-label"> Reading Goals </div>
+    <div class='goal-cards'>
+        {% for goal in readinggoal %}
+            <div class="goal-card">
+                <div>{{ goal.due_date }}</div>
+                <div>{{ goal.time_goal }}</div>
+                <div>{{ goal.char_goal }}</div>
+                <div>{{ goal.current_status }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

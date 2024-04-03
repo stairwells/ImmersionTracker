@@ -1,0 +1,18 @@
+.goals-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.goal-cards {
+    display: flex;
+    flex-direction: row;
+}
+
+.goal-card {
+    height: 250px;
+    width: 200px;
+
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 2em;
+}
