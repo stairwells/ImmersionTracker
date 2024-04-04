@@ -12,7 +12,22 @@
     height: 250px;
     width: 200px;
 
+    background-color: #e1e1eb;
+    color: #14142e;
+
     border: 1px solid black;
     border-radius: 8px;
+    box-shadow: 2px 5px black;
+
     margin: 2em;
+    padding: 1em;
+}
+
+.card-attr-label {
+    font-size: large;
+    font-weight: bold;
+}
+
+.card-attr {
+    margin: 0.5em 0;
 }

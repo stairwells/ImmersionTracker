@@ -6,10 +6,23 @@
     <div class='goal-cards'>
         {% for goal in readinggoal %}
             <div class="goal-card">
-                <div>{{ goal.due_date }}</div>
-                <div>{{ goal.time_goal }}</div>
-                <div>{{ goal.char_goal }}</div>
-                <div>{{ goal.current_status }}</div>
+                <div class="card-attr">
+                    <div class="card-attr-label"> Due: </div>
+                    <div>{{ goal.due_date }}</div>
+                </div>
+                <div class="card-attr">
+                    <div class="card-attr-label"> Time goal: </div>
+                    <div>{{ goal.time_goal }}</div>
+                </div>
+                <div class="card-attr">
+                    <div class="card-attr-label"> Character goal: </div>
+                    <div>{{ goal.char_goal }}</div>
+                </div>
+                <div class="card-attr">
+                    <div class="card-attr-label"> Current Status: </div>
+                    <div>{{ goal.current_status }}</div>
+                </div>
+
             </div>
         {% endfor %}
     </div>
