@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
 from django.contrib.auth import views as auth_views, logout
@@ -40,7 +40,11 @@ class ProfileEditView(LoginRequiredMixin, views.UpdateView):
 
     template_name = 'accounts/profile_edit.html'
     fields = ('nickname',)
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse('profile_details', kwargs={
+            'pk': self.object.pk,
+        })
 
 
 class DeleteAccountView(LoginRequiredMixin, views.DeleteView):

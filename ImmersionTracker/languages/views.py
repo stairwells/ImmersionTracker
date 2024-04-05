@@ -19,7 +19,7 @@ class LanguagesIndexView(views.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['languages'] = get_current_profile(self.request).languages.all()
+        context['languages'] = get_current_profile(self.request).language_set.all()
         context['current_language'] = get_current_language(self.request)
 
         return context

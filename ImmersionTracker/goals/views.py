@@ -5,7 +5,7 @@ from django.views import generic as views
 
 from ImmersionTracker.goals.models import ReadingGoal, ListeningGoal, SRSGoal
 from ImmersionTracker.goals.forms import ReadingGoalCreateForm, ListeningGoalCreateForm, SRSGoalCreateForm
-from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, GetFilteredQuerysetForContextMixin
+from ImmersionTracker.core.mixins import AttachProfileAndLanguageMixin, GetFilteredQuerysetForContextMixin
 
 
 class AllGoalsView(LoginRequiredMixin, GetFilteredQuerysetForContextMixin, views.TemplateView):

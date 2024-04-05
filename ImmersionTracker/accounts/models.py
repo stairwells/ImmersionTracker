@@ -151,12 +151,12 @@ class Profile(models.Model):
     @property
     # Returns sum of immersion time for ALL LANGUAGES, does not include SRS
     def all_languages_total_immersion(self):
-        return sum((lang.total_immersion_time for lang in self.languages.all()), datetime.timedelta())
+        return sum((lang.total_immersion_time for lang in self.language_set.all()), datetime.timedelta())
 
     @property
     # Returns sum of ALL time for ALL LANGUAGES, including SRS
     def all_languages_total_time(self):
-        return sum((lang.total_time for lang in self.languages.all()), datetime.timedelta())
+        return sum((lang.total_time for lang in self.language_set.all()), datetime.timedelta())
 
     def __str__(self):
         display_name = self.nickname if self.nickname else self.user.email

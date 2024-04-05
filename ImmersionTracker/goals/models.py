@@ -46,6 +46,9 @@ class BaseGoal(models.Model):
         auto_now=True,
     )
 
+    def __str__(self):
+        return self.due_date
+
     class Meta:
         abstract = True
 
@@ -82,6 +85,9 @@ class ReadingGoal(BaseGoal):
 
         return self.is_complete
 
+    def __str__(self):
+        return f'{self.due_date} - {self.time_goal} and {self.char_goal if self.char_goal else 0} characters'
+
 
 class ListeningGoal(BaseGoal):
     time_goal = models.DurationField(
@@ -104,6 +110,9 @@ class ListeningGoal(BaseGoal):
 
         return self.is_complete
 
+    def __str__(self):
+        return f'{self.due_date} - {self.time_goal}'
+
 
 class SRSGoal(BaseGoal):
     new_cards_goal = models.IntegerField(
@@ -125,3 +134,6 @@ class SRSGoal(BaseGoal):
             return "In Progress"
 
         return self.is_complete
+
+    def __str__(self):
+        return f'{self.due_date} - {self.new_cards_goal} new cards'

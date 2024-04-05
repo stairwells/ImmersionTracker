@@ -2,33 +2,17 @@ from django.db import models
 from ImmersionTracker.accounts.models import Profile
 from ImmersionTracker.media.models import ReadingMedia, ListeningMedia
 from ImmersionTracker.languages.models import Language
+from ImmersionTracker.core.models import HasOwnerProfile, HasLanguage
 
 
-class BaseEntry(models.Model):
+class BaseEntry(HasOwnerProfile, HasLanguage, models.Model):
     time_length = models.DurationField()
 
-    created_on = models.DateTimeField(
+    created_on = models.DateField(
         auto_now_add=True,
     )
-    edited_on = models.DateTimeField(
+    edited_on = models.DateField(
         auto_now=True,
-    )
-    user_profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name='%(class)s',
-
-        blank=False,
-        null=False,
-    )
-
-    language = models.ForeignKey(
-        Language,
-        on_delete=models.CASCADE,
-        related_name='%(class)s',
-
-        blank=False,
-        null=False,
     )
 
     class Meta:

@@ -3,7 +3,7 @@ from django.views import generic as views
 from django.urls import reverse_lazy
 
 from ImmersionTracker.immersion_entries.models import ReadingEntry, ListeningEntry, SRSEntry
-from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
+from ImmersionTracker.core.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
     GetFilteredQuerysetForContextMixin, FormMediaChoicesMustBeOwnedByCurrentUserMixin
 
 from ImmersionTracker.immersion_entries.forms import ReadingEntryForm, ListeningEntryForm, SRSEntryForm

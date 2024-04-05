@@ -61,7 +61,9 @@ header, footer {
 }
 
 .sidebar {
-    width: 20em;
+    width: 15%;
+    flex-shrink: 0;
+
     background-color: #38761d;
     border: 1px solid black;
     font-size: large;

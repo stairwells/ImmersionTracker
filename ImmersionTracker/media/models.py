@@ -3,15 +3,16 @@ import datetime
 from django.db import models
 from ImmersionTracker.languages.models import Language
 from ImmersionTracker.accounts.models import Profile
+from ImmersionTracker.core.models import HasLanguage, HasOwnerProfile
 
 
-class MediaStatusMixin(models.Model):
+class MediaStatusMixin(HasLanguage, HasOwnerProfile, models.Model):
 
     class Meta:
         abstract = True
 
 
-class BaseMedia(models.Model):
+class BaseMedia(HasOwnerProfile, HasLanguage, models.Model):
     NAME_MAX_LENGTH = 30
     TYPE_MAX_LENGTH = 20
 
@@ -32,24 +33,6 @@ class BaseMedia(models.Model):
     link = models.URLField(
         blank=True,
         null=True,
-    )
-
-    language = models.ForeignKey(
-        Language,
-        on_delete=models.CASCADE,
-        related_name='%(class)s',
-
-        blank=False,
-        null=False,
-    )
-
-    user_profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name='%(class)s',
-
-        blank=False,
-        null=False,
     )
 
     def __str__(self):

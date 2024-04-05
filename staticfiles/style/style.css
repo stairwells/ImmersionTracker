@@ -1,7 +1,9 @@
 @import "main.css";
 @import "header_footer_and_sidebar.css";
+@import 'index.css';
 @import "profile_details.css";
 @import "all_entries.css";
 @import "all_media.css";
 @import "forms.css";
 @import 'goals.css';
+

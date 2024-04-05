@@ -1,0 +1,34 @@
+.index-wrapper {
+    width: 100%;
+}
+
+.index-header-text {
+    width: 100%;
+    text-align: center;
+}
+
+.recent-entries-label {
+    padding: 1em 2em;
+
+    font-size: x-large;
+    border-bottom: 1px solid #e1e1eb;
+}
+
+.recent-entries-cards {
+    display: flex;
+    flex-direction: row;
+
+    margin: 1em;
+
+    gap: 1em;
+}
+
+.index-entry-card-main-content {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    padding: 4px 1em 4px 0.5em;
+
+    background-color: #e1e1eb;
+    color: #14142e;
+}

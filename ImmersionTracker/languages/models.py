@@ -2,9 +2,10 @@ import datetime
 
 from django.db import models
 from ImmersionTracker.accounts.models import Profile
+from ImmersionTracker.core.models import HasOwnerProfile
 
 
-class Language(models.Model):
+class Language(HasOwnerProfile, models.Model):
     LANGUAGE_NAME_MAX_LENGTH = 20
 
     name = models.CharField(
@@ -13,26 +14,18 @@ class Language(models.Model):
         null=False,
         blank=False,
     )
-    user_profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name='languages',
-
-        null=False,
-        blank=False,
-    )
 
     @property
     def reading_time(self):
-        return sum((entry.time_length for entry in self.readingentry.all()), datetime.timedelta())
+        return sum((entry.time_length for entry in self.readingentry_set.all()), datetime.timedelta())
 
     @property
     def listening_time(self):
-        return sum((entry.time_length for entry in self.listeningentry.all()), datetime.timedelta())
+        return sum((entry.time_length for entry in self.listeningentry_set.all()), datetime.timedelta())
 
     @property
     def srs_time(self):
-        return sum((entry.time_length for entry in self.srsentry.all()), datetime.timedelta())
+        return sum((entry.time_length for entry in self.srsentry_set.all()), datetime.timedelta())
 
     @property
     def total_immersion_time(self):

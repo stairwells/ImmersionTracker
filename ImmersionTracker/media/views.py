@@ -4,7 +4,7 @@ from django.views import generic as views
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from ImmersionTracker.media.models import ListeningMedia, ReadingMedia
-from ImmersionTracker.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
+from ImmersionTracker.core.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
     GetFilteredQuerysetForContextMixin
 
 
