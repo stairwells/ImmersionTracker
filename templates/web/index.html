@@ -3,63 +3,71 @@
 {% block main_content %}
     <div class="index-wrapper">
         <h1 class="index-header-text"> Welcome to Immersion Tracker! </h1>
-        <div class="recent-content">
+        {% if request.user.is_authenticated %}
+            <div class="recent-content">
+                <div class="recent-entries">
+                    <div class="recent-entries-label"> Recent Entries </div>
+                    <div class="recent-entries-cards">
+                        {% for entry in recent_entries %}
+                            <div class="index-entry-card">
+                                <div class="index-entry-card-main-content">
+                                    <p>{{ entry.media.name }}</p>
+                                    <p>{{ entry.time_length }}</p>
+                                </div>
+                                <div class="date-info">
+                                    {{ entry.edited_on }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="recent-entries">
+                    <div class="recent-entries-label"> Recent Media </div>
+                    <div class="recent-entries-cards">
+                        {% for media in recent_media %}
+                            <div class="index-entry-card">
+                                <div class="index-entry-card-main-content">
+                                    <p>{{ media.name }}</p>
+                                    <p>{{ media.type }}</p>
+                                </div>
+                                <div class="date-info">
+                                    {{ media.status }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             <div class="recent-entries">
-                <div class="recent-entries-label"> Recent Entries </div>
-                <div class="recent-entries-cards">
-                    {% for entry in recent_entries %}
-                        <div class="index-entry-card">
-                            <div class="index-entry-card-main-content">
-                                <p>{{ entry.media.name }}</p>
-                                <p>{{ entry.time_length }}</p>
+                    <div class="recent-entries-label"> Recent Goals </div>
+                    <div class="recent-entries-cards">
+                        {% for goal in recent_goals %}
+                            <div class="index-entry-card">
+                                <div class="index-entry-card-main-content">
+                                    <p>{{ goal.due_date }}</p>
+                                    {% if goal.time_goal %}
+                                        <p>{{ goal.time_goal }}</p>
+                                    {% endif %}
+                                    {% if goal.char_goal %}
+                                        <p>{{ goal.char_goal }}</p>
+                                    {% endif %}
+                                    {% if goal.new_cards_goal %}
+                                        <p>{{ goal.new_cards_goal }}</p>
+                                    {% endif %}
+                                </div>
+                                <div class="date-info">
+                                    {{ goal.edited_on }}
+                                </div>
                             </div>
-                            <div class="date-info">
-                                {{ entry.edited_on }}
-                            </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-            <div class="recent-entries">
-                <div class="recent-entries-label"> Recent Media </div>
-                <div class="recent-entries-cards">
-                    {% for media in recent_media %}
-                        <div class="index-entry-card">
-                            <div class="index-entry-card-main-content">
-                                <p>{{ media.name }}</p>
-                                <p>{{ media.type }}</p>
-                            </div>
-                            <div class="date-info">
-                                {{ media.status }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+        {% else %}
+            <div class="no-login-index-txt">
+                An all-in-one tool to keep track of all your language learning immersion! Supports multiple languages,
+                as well as self-imposed goals! You have the freedom to determine how, where and when you immerse, we just
+                keep track and get out of your way. To get started, just register an account!
             </div>
-        <div class="recent-entries">
-                <div class="recent-entries-label"> Recent Goals </div>
-                <div class="recent-entries-cards">
-                    {% for goal in recent_goals %}
-                        <div class="index-entry-card">
-                            <div class="index-entry-card-main-content">
-                                <p>{{ goal.due_date }}</p>
-                                {% if goal.time_goal %}
-                                    <p>{{ goal.time_goal }}</p>
-                                {% endif %}
-                                {% if goal.char_goal %}
-                                    <p>{{ goal.char_goal }}</p>
-                                {% endif %}
-                                {% if goal.new_cards_goal %}
-                                    <p>{{ goal.new_cards_goal }}</p>
-                                {% endif %}
-                            </div>
-                            <div class="date-info">
-                                {{ goal.edited_on }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}

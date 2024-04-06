@@ -13,6 +13,8 @@ class IndexView(views.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if not self.request.user.is_authenticated:
+            return context
 
         reading_entries = ReadingEntry.objects.filter(user_profile=get_current_profile(self.request),
                                                       language=get_current_language(self.request))

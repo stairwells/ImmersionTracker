@@ -12,24 +12,44 @@
 </head>
 <body>
     <header>
-        <div class="go-to-index-btn">
+        <div class="header-nav go-to-index-btn">
+            <img src="{% static 'icons/home.svg' %}" alt="icon-home">
             <a href="{% url 'index' %}"> Home </a>
         </div>
         <div class="navigation">
             <ul class="header-nav logout-and-language">
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'languages_index' %}">Current Language:
-                        {% if request.user.profile.current_language %}
-                            {{ request.user.profile.current_language.name }}
-                        {% else %}
-                            None
-                        {% endif %}
+                    <li>
+                    <div class="header-nav-button">
+                        <img src="{% static 'icons/language.svg' %}" alt="icon-language">
+                        <a href="{% url 'languages_index' %}">Current Language:
+                            {% if request.user.profile.current_language %}
+                                {{ request.user.profile.current_language.name }}
+                            {% else %}
+                                None
+                            {% endif %}
                         </a>
+                    </div>
                     </li>
-                    <li><a href="{% url 'logout' %}"> Logout </a></li>
+                    <li>
+                        <div class="header-nav-button">
+                            <img src="{% static 'icons/logout.svg' %}" alt="icon-logout">
+                            <a href="{% url 'logout' %}"> Logout </a>
+                        </div>
+                    </li>
                 {% else %}
-                    <li><a href="{% url 'login' %}"> Log In </a></li>
-                    <li><a href="{% url 'register_account' %}"> Register </a></li>
+                    <li>
+                        <div class="header-nav-button">
+                            <img src="{% static 'icons/login.svg' %}" alt="icon-login">
+                            <a href="{% url 'login' %}"> Log In </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="header-nav-button">
+                            <img src="{% static 'icons/register.svg' %}" alt="icon-register">
+                            <a href="{% url 'register_account' %}"> Register </a>
+                        </div>
+                    </li>
                 {% endif %}
             </ul>
         </div>

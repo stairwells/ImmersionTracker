@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <h1>Current Language:</h1>
-    <p> {{ current_language.name }}</p>
-
-    <h2>Other Languages:</h2>
-    {% for lang in languages %}
-        {% if request.user.profile.current_language != lang %}
-            <p> {{ lang.name }} -<a href="{% url 'language_change_current' pk=lang.pk %}"> Set as current </a></p>
-        {% endif %}
-    {% endfor %}
-    <p><a href="{% url 'language_create' %}">New Language</a></p>
+    <div class="languages-wrapper">
+        <div class="current-language-display">
+            <h1>Current Language:</h1>
+            <p> {{ current_language.name }}</p>
+        </div>
+        <div class="other-languages-display">
+            <h2>Other Languages:</h2>
+            {% for lang in languages %}
+                {% if request.user.profile.current_language != lang %}
+                    <p> {{ lang.name }} -<a href="{% url 'language_change_current' pk=lang.pk %}"> Set as current </a></p>
+                {% endif %}
+            {% endfor %}
+            <p><a href="{% url 'language_create' %}">New Language</a></p>
+        </div>
+    </div>
 {% endblock %}
