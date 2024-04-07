@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.shortcuts import redirect
 from django.views import generic as views
@@ -25,7 +25,8 @@ class LanguagesIndexView(views.TemplateView):
         return context
 
 
-class LanguageCreateView(LoginRequiredMixin, views.CreateView):
+class LanguageCreateView(LoginRequiredMixin, PermissionRequiredMixin, views.CreateView):
+    permission_required = 'languages.add_language'
     queryset = Language.objects.all()
     template_name = 'languages/language_create.html'
     fields = ('name',)

@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views import generic as views
 from django.urls import reverse_lazy
 
@@ -15,10 +15,11 @@ class AllEntriesView(LoginRequiredMixin, GetFilteredQuerysetForContextMixin, vie
     models = (ReadingEntry, ListeningEntry, SRSEntry)
 
 
-class ReadingEntryCreateView(LoginRequiredMixin, FormMediaChoicesMustBeOwnedByCurrentUserMixin,
+class ReadingEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin, FormMediaChoicesMustBeOwnedByCurrentUserMixin,
                              AttachProfileAndLanguageMixin, views.CreateView):
     queryset = ReadingEntry.objects.all()
     form_class = ReadingEntryForm
+    permission_required = 'immersion_entries.add_readingentry'
     success_url = reverse_lazy('all_entries')
 
     template_name = 'immersion_entries/reading/reading_entry_create.html'
@@ -30,26 +31,38 @@ class ReadingEntryCreateView(LoginRequiredMixin, FormMediaChoicesMustBeOwnedByCu
         return form
 
 
-class ReadingEntryDetailsView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DetailView):
+class ReadingEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
+                              QuerysetByProfileAndLanguageMixin, views.DetailView):
+
+    permission_required = 'immersion_entries.view_readingentry'
     template_name = 'immersion_entries/reading/reading_entry_details.html'
     current_model = ReadingEntry
 
 
-class ReadingEntryEditView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.UpdateView):
+class ReadingEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
+                           QuerysetByProfileAndLanguageMixin, views.UpdateView):
+
+    permission_required = 'immersion_entries.change_readingentry'
     template_name = 'immersion_entries/reading/reading_entry_edit.html'
     form_class = ReadingEntryForm
     success_url = reverse_lazy('all_entries')
     current_model = ReadingEntry
 
 
-class ReadingEntryDeleteView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DeleteView):
+class ReadingEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin,
+                             QuerysetByProfileAndLanguageMixin, views.DeleteView):
+
+    permission_required = 'immersion_entries.delete_readingentry'
     template_name = 'immersion_entries/reading/reading_entry_delete.html'
     current_model = ReadingEntry
     success_url = reverse_lazy('all_entries')
 
 
-class ListeningEntryCreateView(LoginRequiredMixin, AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin,
+class ListeningEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin,
+                               AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin,
                                FormMediaChoicesMustBeOwnedByCurrentUserMixin, views.CreateView):
+
+    permission_required = 'immersion_entries.add_listeningentry'
     form_class = ListeningEntryForm
     success_url = reverse_lazy('all_entries')
     current_model = ListeningEntry
@@ -57,46 +70,65 @@ class ListeningEntryCreateView(LoginRequiredMixin, AttachProfileAndLanguageMixin
     template_name = 'immersion_entries/listening/listening_entry_create.html'
 
 
-class ListeningEntryDetails(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DetailView):
+class ListeningEntryDetails(LoginRequiredMixin, PermissionRequiredMixin,
+                            QuerysetByProfileAndLanguageMixin, views.DetailView):
+
+    permission_required = 'immersion_entries.view_listeningentry'
     template_name = 'immersion_entries/listening/listening_entry_details.html'
     current_model = ListeningEntry
 
 
-class ListeningEntryEditView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.UpdateView):
+class ListeningEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
+                             QuerysetByProfileAndLanguageMixin, views.UpdateView):
+
+    permission_required = 'immersion_entries.change_listeningentry'
     template_name = 'immersion_entries/listening/listening_entry_edit.html'
     fields = ('time_length', 'media',)
     success_url = reverse_lazy('all_entries')
     current_model = ListeningEntry
 
 
-class ListeningEntryDeleteView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DeleteView):
+class ListeningEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin,
+                               QuerysetByProfileAndLanguageMixin, views.DeleteView):
+
+    permission_required = 'immersion_entries.delete_listeningentry'
     template_name = 'immersion_entries/listening/listening_entry_delete.html'
     current_model = ListeningEntry
     success_url = reverse_lazy('all_entries')
 
 
-class SRSEntryCreateView(LoginRequiredMixin, AttachProfileAndLanguageMixin,
+class SRSEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin, AttachProfileAndLanguageMixin,
                          QuerysetByProfileAndLanguageMixin, views.CreateView):
+
+    permission_required = 'immersion_entries.add_srsentry'
     template_name = 'immersion_entries/srs/srs_entry_create.html'
     form_class = SRSEntryForm
     success_url = reverse_lazy('all_entries')
     current_model = SRSEntry
 
 
-class SRSEntryDetailsView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DetailView):
+class SRSEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
+                          QuerysetByProfileAndLanguageMixin, views.DetailView):
+
+    permission_required = 'immersion_entries.view_srsentry'
     template_name = 'immersion_entries/srs/srs_entry_details.html'
     current_model = SRSEntry
 
 
-class SRSEntryEditView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.UpdateView):
+class SRSEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
+                       QuerysetByProfileAndLanguageMixin, views.UpdateView):
+
+    permission_required = 'immersion_entries.change_srsentry'
     template_name = 'immersion_entries/srs/srs_entry_edit.html'
     fields = ('time_length', 'new_cards',)
     success_url = reverse_lazy('all_entries')
     current_model = SRSEntry
 
 
-class SRSEntryDeleteView(LoginRequiredMixin, QuerysetByProfileAndLanguageMixin, views.DeleteView):
+class SRSEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin,
+                         QuerysetByProfileAndLanguageMixin, views.DeleteView):
+
+    permission_required = 'immersion_entries.delete_srsentry'
     template_name = 'immersion_entries/srs/srs_entry_delete.html'
     current_model = SRSEntry
     success_url = reverse_lazy('all_entries')
-

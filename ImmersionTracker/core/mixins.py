@@ -1,7 +1,21 @@
+from django.contrib.auth.mixins import AccessMixin
 from django.shortcuts import redirect
 
 from ImmersionTracker.utils import get_current_profile, get_current_language
 
+
+class UserOwnsProfileMixin(AccessMixin):
+    def check_profile_owner(self):
+        profile = super().get_object()
+
+        if not self.request.user.is_authenticated or profile.user != self.request.user:
+            return self.handle_no_permission()
+
+    def get(self, *args, **kwargs):
+        return self.check_profile_owner() or super().get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        return self.check_profile_owner() or super().post(*args, **kwargs)
 
 class AttachProfileAndLanguageMixin:
     def form_valid(self, form):
