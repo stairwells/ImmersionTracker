@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <div class="form-wrapper">
+        <form action="{% url 'listening_goal_edit' pk=object.pk %}" method="post">
+            {{ form }}
+
+            {% csrf_token %}
+            <button type="submit"> Create </button>
+        </form>
+    </div>
+{% endblock %}

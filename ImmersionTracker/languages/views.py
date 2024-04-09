@@ -9,12 +9,13 @@ from ImmersionTracker.utils import get_current_profile, get_current_language
 from ImmersionTracker.languages.models import Language
 
 
+@login_required
 def set_current_lang(profile, lang):
     profile.current_language = lang
     profile.save()
 
 
-class LanguagesIndexView(views.TemplateView):
+class LanguagesIndexView(LoginRequiredMixin, views.TemplateView):
     template_name = 'languages/languages_index.html'
 
     def get_context_data(self, **kwargs):
@@ -50,5 +51,5 @@ def language_change_current_view(request, pk):
     return redirect('languages_index')
 
 
-class NoCurrentLanguage(LoginRequiredMixin, views.TemplateView):
+class NoCurrentLanguageView(LoginRequiredMixin, views.TemplateView):
     template_name = 'languages/no_current_language.html'

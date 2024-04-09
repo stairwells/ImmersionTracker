@@ -24,12 +24,6 @@ class ReadingEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin, FormMe
 
     template_name = 'immersion_entries/reading/reading_entry_create.html'
 
-    def get_form_class(self):
-        form = super().get_form_class()
-        form.base_fields['media'].limit_choices_to = {'user_profile': get_current_profile(self.request)}
-
-        return form
-
 
 class ReadingEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
                               QuerysetByProfileAndLanguageMixin, views.DetailView):
