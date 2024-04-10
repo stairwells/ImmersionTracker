@@ -24,6 +24,8 @@ a:hover {
     display: flex;
     overflow-y: auto;
     overflow-x: clip;
+
+    font-family: "Roboto", sans-serif;
 }
 
 html {
