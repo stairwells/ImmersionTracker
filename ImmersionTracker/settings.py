@@ -9,24 +9,23 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h68qm0wi3xzycbf%rbd87a(+m=-!bhz_m4rzat1y%)xld=3bek'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 1)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+CSRF_TRUSTED_ORIGINS = [f'https://{host}' for host in ALLOWED_HOSTS]
 
 # Application definition
 
@@ -77,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ImmersionTracker.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -88,6 +86,17 @@ DATABASES = {
     }
 }
 
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.environ.get('POSTGRES_DB'),
+            'USER': os.environ.get('POSTGRES_USER'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+            'HOST': os.environ.get('POSTGRES_HOST'),
+            'PORT': os.environ.get('POSTGRES_PORT'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -121,11 +130,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'staticfiles/',
 ]
@@ -135,8 +144,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.ImmersionTrackerUser'
+AUTH_USER_MODEL = BASE_DIR / 'staticfiles'
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
-
+LOGIN_URL = os.environ.get('LOGIN_URL')
+LOGIN_REDIRECT_URL = os.environ.get('LOGIN_REDIRECT_URL')
