@@ -134,7 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'staticfiles/',
 ]
@@ -144,7 +143,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = BASE_DIR / 'staticfiles'
+AUTH_USER_MODEL = os.getenv('AUTH_USER_MODEL')
 
 LOGIN_URL = os.environ.get('LOGIN_URL')
 LOGIN_REDIRECT_URL = os.environ.get('LOGIN_REDIRECT_URL')
