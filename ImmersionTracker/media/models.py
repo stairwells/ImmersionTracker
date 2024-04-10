@@ -35,6 +35,10 @@ class BaseMedia(HasOwnerProfile, HasLanguage, models.Model):
         null=True,
     )
 
+    archived = models.BooleanField(
+        default=False,
+    )
+
     def __str__(self):
         return f"{self.name} ({self.type}): {self.status}"
 

@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <p> Are you sure you want to delete {{ object }}?</p>
-    <form action="{% url 'srs_goal_delete' pk=object.pk %}" method="post"> {% csrf_token %}
-        <button type="submit"> Confirm </button>
-    </form>
+    <div class="delete-wrapper">
+        <div class="delete-box">
+            <p> Are you sure you want to delete {{ object }}?</p>
+            <form action="{% url 'srs_goal_delete' pk=object.pk %}" method="post"> {% csrf_token %}
+                <button type="submit"> Confirm </button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

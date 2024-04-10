@@ -4,11 +4,26 @@ from django.shortcuts import redirect
 from ImmersionTracker.utils import get_current_profile, get_current_language
 
 
+class UserOwnsObjectMixin(AccessMixin):
+    def check_object_owner(self):
+        object = super().get_object()
+
+        if not self.request.user.is_authenticated or object.user_profile != get_current_profile(self.request):
+            return self.handle_no_permission()
+
+    def get(self, *args, **kwargs):
+        return self.check_object_owner() or super().get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        return self.check_object_owner() or super().post(*args, **kwargs)
+
+
 class UserOwnsProfileMixin(AccessMixin):
     def check_profile_owner(self):
         profile = super().get_object()
+        request_profile = get_current_profile(self.request)
 
-        if not self.request.user.is_authenticated or profile.user != self.request.user:
+        if not self.request.user.is_authenticated or profile != request_profile:
             return self.handle_no_permission()
 
     def get(self, *args, **kwargs):
@@ -16,6 +31,7 @@ class UserOwnsProfileMixin(AccessMixin):
 
     def post(self, *args, **kwargs):
         return self.check_profile_owner() or super().post(*args, **kwargs)
+
 
 class AttachProfileAndLanguageMixin:
     def form_valid(self, form):
@@ -43,8 +59,17 @@ class QuerysetByProfileAndLanguageMixin(LanguageRequiredMixin):
         return queryset
 
 
+class QuerysetUnarchivedByProfileAndLanguageMixin(QuerysetByProfileAndLanguageMixin):
+    def get_queryset(self):
+        queryset = self.current_model.objects.filter(user_profile=get_current_profile(self.request),
+                                                     language=get_current_language(self.request),
+                                                     archived=False)
+        return queryset
+
+
 class GetFilteredQuerysetForContextMixin(LanguageRequiredMixin):
-    def get_filtered_context(self, model, profile, lang):
+    @staticmethod
+    def get_filtered_context(model, profile, lang):
         data = model.objects.filter(user_profile=profile,
                                     language=lang)
 
@@ -61,9 +86,22 @@ class GetFilteredQuerysetForContextMixin(LanguageRequiredMixin):
         return context
 
 
+class GetFilteredQuerysetUnarchivedMediaForContextMixin(GetFilteredQuerysetForContextMixin):
+    @staticmethod
+    def get_filtered_context(model, profile, lang):
+        data = model.objects.filter(user_profile=profile,
+                                    language=lang,
+                                    archived=False,)
+
+        return data
+
+
 class FormMediaChoicesMustBeOwnedByCurrentUserMixin:
     def get_form_class(self):
         form = super().get_form_class()
-        form.base_fields['media'].limit_choices_to = {'user_profile': get_current_profile(self.request)}
+        form.base_fields['media'].limit_choices_to = {
+            'user_profile': get_current_profile(self.request),
+            'archived': False,
+        }
 
         return form

@@ -19,6 +19,10 @@
     padding: 1.5em 3em 0.8em 1em;
 }
 
+.media-grid-container {
+    margin-bottom: 1em;
+}
+
 .media-grid-container.reading {
     width: 90%;
     display: grid;

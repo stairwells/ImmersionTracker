@@ -127,6 +127,11 @@ class Profile(models.Model):
         primary_key=True,
     )
 
+    profile_picture = models.URLField(
+        blank=True,
+        null=True,
+    )
+
     @property
     def reading_time(self):
         return self.current_language.reading_time

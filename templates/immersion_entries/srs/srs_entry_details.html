@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div>Time: {{ object.time_length }}</div>
-    <div>New Cards: {{ object.new_cards }}</div>
+    <div class="details-wrapper">
+        <div class="details-box">
+            <div>Time: {{ object.time_length }}</div>
+            <div>New Cards: {{ object.new_cards }}</div>
+        </div>
+    </div>
 {% endblock %}

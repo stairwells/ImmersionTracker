@@ -49,6 +49,17 @@ class BaseGoal(models.Model):
     def __str__(self):
         return self.due_date
 
+    @property
+    def is_complete(self):
+        return False
+
+    @property
+    def current_status(self):
+        if date.today() < self.due_date and not self.is_complete:
+            return "In Progress"
+
+        return "Completed" if self.is_complete else "Failed"
+
     class Meta:
         abstract = True
 
@@ -76,14 +87,7 @@ class ReadingGoal(BaseGoal):
         else:
             chars_goal_reached = True
 
-        return 'Complete' if time_goal_reached and chars_goal_reached else 'Failed'
-
-    @property
-    def current_status(self):
-        if date.today() < self.due_date:
-            return "In Progress"
-
-        return self.is_complete
+        return True if time_goal_reached and chars_goal_reached else False
 
     def __str__(self):
         return f'{self.due_date} - {self.time_goal} and {self.char_goal if self.char_goal else 0} characters'
@@ -103,13 +107,6 @@ class ListeningGoal(BaseGoal):
 
         return 'Complete' if time_goal_reached else 'Failed'
 
-    @property
-    def current_status(self):
-        if date.today() < self.due_date:
-            return "In Progress"
-
-        return self.is_complete
-
     def __str__(self):
         return f'{self.due_date} - {self.time_goal}'
 
@@ -127,13 +124,6 @@ class SRSGoal(BaseGoal):
         cards_goal_reached = cards_created >= self.new_cards_goal
 
         return 'Complete' if cards_goal_reached else 'Failed'
-
-    @property
-    def current_status(self):
-        if date.today() < self.due_date:
-            return "In Progress"
-
-        return self.is_complete
 
     def __str__(self):
         return f'{self.due_date} - {self.new_cards_goal} new cards'

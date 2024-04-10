@@ -10,10 +10,14 @@
             <h2>Other Languages:</h2>
             {% for lang in languages %}
                 {% if request.user.profile.current_language != lang %}
-                    <p> {{ lang.name }} -<a href="{% url 'language_change_current' pk=lang.pk %}"> Set as current </a></p>
+                    <p> {{ lang.name }} - 
+                        <a href="{% url 'language_change_current' pk=lang.pk %}"> Set as current </a>
+                        <a href="{% url 'language_delete' pk=lang.pk%}"> Delete </a>
                 {% endif %}
             {% endfor %}
-            <p><a href="{% url 'language_create' %}">New Language</a></p>
+            <div class="create-new-content">
+                <a href="{% url 'language_create' %}">+</a>
+            </div>
         </div>
     </div>
 {% endblock %}

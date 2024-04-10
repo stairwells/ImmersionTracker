@@ -34,3 +34,6 @@ class Language(HasOwnerProfile, models.Model):
     @property
     def total_time(self):
         return sum((self.reading_time, self.listening_time, self.srs_time), datetime.timedelta())
+
+    def __str__(self):
+        return self.name

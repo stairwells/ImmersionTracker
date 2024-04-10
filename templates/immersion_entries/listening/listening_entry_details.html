@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div>Time: {{ object.time_length }}</div>
-    <div>Media: {{ object.media }}</div>
+    <div class="details-wrapper">
+        <div class="details-box">
+            <div>Time: {{ object.time_length }}</div>
+            <div>Media: {{ object.media }}</div>
+        </div>
+    </div>
 {% endblock %}

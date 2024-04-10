@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div>Name: {{ object.name }}</div>
-    <div>Type: {{ object.type }}</div>
-    <div>Status: {{ object.status }}</div>
+    <div class="details-wrapper">
+        <div class="details-box">
+            <div>Name: {{ object.name }}</div>
+            <div>Type: {{ object.type }}</div>
+            <div>Status: {{ object.status }}</div>
+        </div>
+    </div>
 {% endblock %}

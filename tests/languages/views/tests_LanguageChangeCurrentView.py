@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Permission
 from django.urls import reverse
 
 from ImmersionTracker.languages.models import Language
@@ -21,6 +22,7 @@ class LanguageChangeCurrentViewTests(TestBase):
         self.assertEqual(self.user.profile.current_language, self.target_lang)
 
     def test__get_language_change_current__expect_current_language_changes_to_target_lang_and_redirect(self):
+        self.user.user_permissions.add(Permission.objects.get(name='Can change language'))
         self.client.login(**self.USER_DATA)
 
         response = self.client.get(reverse('language_change_current', kwargs={'pk': self.target_lang.pk}))

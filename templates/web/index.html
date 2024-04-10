@@ -18,6 +18,8 @@
                                     {{ entry.edited_on }}
                                 </div>
                             </div>
+                        {% empty %}
+                            <p> Nothing, for now </p>
                         {% endfor %}
                     </div>
                 </div>
@@ -34,6 +36,8 @@
                                     {{ media.status }}
                                 </div>
                             </div>
+                        {% empty %}
+                            <p> Nothing, for now </p>
                         {% endfor %}
                     </div>
                 </div>
@@ -58,6 +62,8 @@
                                     {{ goal.edited_on }}
                                 </div>
                             </div>
+                        {% empty %}
+                            <p> Nothing, for now </p>
                         {% endfor %}
                     </div>
                 </div>

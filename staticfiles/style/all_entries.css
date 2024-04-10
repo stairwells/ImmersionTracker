@@ -3,7 +3,7 @@
     padding-left: 20px;
 }
 
-.entry-category-tabs-wrapper {
+.category-tabs-wrapper {
     display: flex;
     flex-direction: row;
     height: 5em;
@@ -12,7 +12,7 @@
     margin-top: 1em;
 }
 
-.entry-category-tab {
+.category-tab {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,10 +20,12 @@
     font-size: x-large;
     font-weight: bold;
 
+    border-radius: 8px;
+
     padding: 1.5em;
 }
 
-.entry-category-tab:hover {
+.category-tab:hover {
     background-color: #e1e1eb;
     color: #14142e;
 
@@ -44,6 +46,10 @@
     font-size: x-large;
 
     padding: 1.5em 3em 0.8em 1em;
+}
+
+.entry-grid-container {
+    margin-bottom: 1em;
 }
 
 .entry-grid-container.reading {

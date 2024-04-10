@@ -3,8 +3,8 @@
 {% block main_content %}
     <div class="delete-wrapper">
         <div class="delete-box">
-            <p> Are you sure you want to delete your account?</p>
-            <form action="{% url 'account_delete' pk=object.pk %}" method="post"> {% csrf_token %}
+            <p> Are you sure you want to delete {{ object }}?</p>
+            <form action="{% url 'language_delete' pk=object.pk %}" method="post"> {% csrf_token %}
                 <button type="submit"> Confirm </button>
             </form>
         </div>

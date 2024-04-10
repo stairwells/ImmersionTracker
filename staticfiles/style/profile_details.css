@@ -25,6 +25,11 @@
     border: 1px solid #14142e;
 }
 
+.profile-picture > img {
+    width: 100%;
+    border-radius: 50%;
+}
+
 .nickname-display {
     flex: 1;
     font-size: x-large;

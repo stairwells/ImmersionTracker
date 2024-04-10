@@ -10,6 +10,7 @@
 .goal-cards {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .goal-card {
@@ -34,4 +35,16 @@
 
 .card-attr {
     margin: 0.5em 0;
+}
+
+.goal-creation-button {
+    height: 250px;
+    width: 200px;
+
+    margin: 2em;
+    padding: 1em;
+}
+
+.goal-creation-button > a {
+    font-size: 50px;
 }

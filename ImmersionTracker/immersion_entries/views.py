@@ -4,10 +4,9 @@ from django.urls import reverse_lazy
 
 from ImmersionTracker.immersion_entries.models import ReadingEntry, ListeningEntry, SRSEntry
 from ImmersionTracker.core.mixins import AttachProfileAndLanguageMixin, QuerysetByProfileAndLanguageMixin, \
-    GetFilteredQuerysetForContextMixin, FormMediaChoicesMustBeOwnedByCurrentUserMixin
+    GetFilteredQuerysetForContextMixin, FormMediaChoicesMustBeOwnedByCurrentUserMixin, UserOwnsObjectMixin
 
 from ImmersionTracker.immersion_entries.forms import ReadingEntryForm, ListeningEntryForm, SRSEntryForm
-from ImmersionTracker.utils import get_current_profile
 
 
 class AllEntriesView(LoginRequiredMixin, GetFilteredQuerysetForContextMixin, views.TemplateView):
@@ -25,7 +24,7 @@ class ReadingEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin, FormMe
     template_name = 'immersion_entries/reading/reading_entry_create.html'
 
 
-class ReadingEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
+class ReadingEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                               QuerysetByProfileAndLanguageMixin, views.DetailView):
 
     permission_required = 'immersion_entries.view_readingentry'
@@ -33,7 +32,7 @@ class ReadingEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
     current_model = ReadingEntry
 
 
-class ReadingEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
+class ReadingEntryEditView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                            QuerysetByProfileAndLanguageMixin, views.UpdateView):
 
     permission_required = 'immersion_entries.change_readingentry'
@@ -43,7 +42,7 @@ class ReadingEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
     current_model = ReadingEntry
 
 
-class ReadingEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin,
+class ReadingEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                              QuerysetByProfileAndLanguageMixin, views.DeleteView):
 
     permission_required = 'immersion_entries.delete_readingentry'
@@ -64,7 +63,7 @@ class ListeningEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin,
     template_name = 'immersion_entries/listening/listening_entry_create.html'
 
 
-class ListeningEntryDetails(LoginRequiredMixin, PermissionRequiredMixin,
+class ListeningEntryDetails(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                             QuerysetByProfileAndLanguageMixin, views.DetailView):
 
     permission_required = 'immersion_entries.view_listeningentry'
@@ -72,7 +71,7 @@ class ListeningEntryDetails(LoginRequiredMixin, PermissionRequiredMixin,
     current_model = ListeningEntry
 
 
-class ListeningEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
+class ListeningEntryEditView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                              QuerysetByProfileAndLanguageMixin, views.UpdateView):
 
     permission_required = 'immersion_entries.change_listeningentry'
@@ -82,7 +81,7 @@ class ListeningEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
     current_model = ListeningEntry
 
 
-class ListeningEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin,
+class ListeningEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                                QuerysetByProfileAndLanguageMixin, views.DeleteView):
 
     permission_required = 'immersion_entries.delete_listeningentry'
@@ -101,7 +100,7 @@ class SRSEntryCreateView(LoginRequiredMixin, PermissionRequiredMixin, AttachProf
     current_model = SRSEntry
 
 
-class SRSEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
+class SRSEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                           QuerysetByProfileAndLanguageMixin, views.DetailView):
 
     permission_required = 'immersion_entries.view_srsentry'
@@ -109,7 +108,7 @@ class SRSEntryDetailsView(LoginRequiredMixin, PermissionRequiredMixin,
     current_model = SRSEntry
 
 
-class SRSEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
+class SRSEntryEditView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                        QuerysetByProfileAndLanguageMixin, views.UpdateView):
 
     permission_required = 'immersion_entries.change_srsentry'
@@ -119,7 +118,7 @@ class SRSEntryEditView(LoginRequiredMixin, PermissionRequiredMixin,
     current_model = SRSEntry
 
 
-class SRSEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin,
+class SRSEntryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, UserOwnsObjectMixin,
                          QuerysetByProfileAndLanguageMixin, views.DeleteView):
 
     permission_required = 'immersion_entries.delete_srsentry'

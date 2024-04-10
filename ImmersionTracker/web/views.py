@@ -16,12 +16,30 @@ class IndexView(views.TemplateView):
         if not self.request.user.is_authenticated:
             return context
 
-        reading_entries = ReadingEntry.objects.filter(user_profile=get_current_profile(self.request),
-                                                      language=get_current_language(self.request))
-        listening_entries = ListeningEntry.objects.filter(user_profile=get_current_profile(self.request),
-                                                          language=get_current_language(self.request))
-        srs_entries = SRSEntry.objects.filter(user_profile=get_current_profile(self.request),
-                                              language=get_current_language(self.request))
+        reading_entries = (
+            ReadingEntry.objects
+            .filter(
+                user_profile=get_current_profile(self.request),
+                language=get_current_language(self.request)
+                )
+            .prefetch_related('media')
+        )
+        listening_entries = (
+            ListeningEntry.objects
+            .filter(
+                user_profile=get_current_profile(self.request),
+                language=get_current_language(self.request)
+                )
+            .prefetch_related('media')
+        )
+        srs_entries = (
+            SRSEntry.objects
+            .filter(
+                user_profile=get_current_profile(self.request),
+                language=get_current_language(self.request)
+                )
+            .prefetch_related('media')
+        )
 
         context['recent_entries'] = list(chain(reading_entries, listening_entries, srs_entries))[:10]
 

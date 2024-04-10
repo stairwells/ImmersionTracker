@@ -3,7 +3,7 @@ from django.forms import ModelForm, SelectDateWidget
 from ImmersionTracker.goals.models import ReadingGoal, ListeningGoal, SRSGoal
 
 
-class ReadingGoalCreateForm(ModelForm):
+class ReadingGoalForm(ModelForm):
 
     class Meta:
         model = ReadingGoal
@@ -14,7 +14,7 @@ class ReadingGoalCreateForm(ModelForm):
         }
 
 
-class ListeningGoalCreateForm(ModelForm):
+class ListeningGoalForm(ModelForm):
 
     class Meta:
         model = ListeningGoal
@@ -25,7 +25,7 @@ class ListeningGoalCreateForm(ModelForm):
         }
 
 
-class SRSGoalCreateForm(ModelForm):
+class SRSGoalForm(ModelForm):
 
     class Meta:
         model = SRSGoal

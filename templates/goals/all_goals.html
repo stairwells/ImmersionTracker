@@ -2,67 +2,107 @@
 
 {% block main_content %}
     <div class="goals-wrapper">
-        <div class="category-label"> Reading Goals </div>
-        <div class='goal-cards'>
-        {% for goal in readinggoal %}
-            <div class="goal-card">
-                <div class="card-attr">
-                    <div class="card-attr-label"> Due: </div>
-                    <div>{{ goal.due_date }}</div>
-                </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> Time goal: </div>
-                    <div>{{ goal.time_goal }}</div>
-                </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> Character goal: </div>
-                    <div>{{ goal.char_goal }}</div>
-                </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> Current Status: </div>
-                    <div>{{ goal.current_status }}</div>
-                </div>
-
-            </div>
-        {% endfor %}
+        <div class="category-tabs-wrapper">
+            <div class="category-tab">Reading</div>
+            <div class="category-tab">Listening</div>
+            <div class="category-tab">SRS</div>
         </div>
-        <div class="category-label"> Listening Goals </div>
-        <div class='goal-cards'>
-        {% for goal in listeninggoal %}
-            <div class="goal-card">
-                <div class="card-attr">
-                    <div class="card-attr-label"> Due: </div>
-                    <div>{{ goal.due_date }}</div>
+        <div class="goals-box" id="reading">
+            <div class="category-label"> Reading Goals </div>
+            <div class='goal-cards'>
+            {% for goal in readinggoal %}
+                <div class="goal-card">
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Due: </div>
+                        <div>{{ goal.due_date }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Time goal: </div>
+                        <div>{{ goal.time_goal }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Character goal: </div>
+                        <div>{{ goal.char_goal }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Current Status: </div>
+                        <div>{{ goal.current_status }}</div>
+                    </div>
+                     <div class="card-attr">
+                        <div class="card-attr-label"> Options: </div>
+                        <div>
+                            <a href="{% url 'reading_goal_edit' pk=goal.pk%}"> Edit </a>
+                            <a href="{% url 'reading_goal_delete' pk=goal.pk%}"> Delete </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> Time goal: </div>
-                    <div>{{ goal.time_goal }}</div>
-                </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> Current Status: </div>
-                    <div>{{ goal.current_status }}</div>
-                </div>
+            {% endfor %}
+            <div class="create-new-content goal-creation-button">
+                <a href="{% url 'reading_goal_create' %}">+</a>
             </div>
-        {% endfor %}
+            </div>
         </div>
-        <div class="category-label"> SRS Goals </div>
-        <div class='goal-cards'>
-        {% for goal in srsgoal %}
-            <div class="goal-card">
-                <div class="card-attr">
-                    <div class="card-attr-label"> Due: </div>
-                    <div>{{ goal.due_date }}</div>
+        <div class="goals-box" id="listening">
+            <div class="category-label"> Listening Goals </div>
+            <div class='goal-cards'>
+            {% for goal in listeninggoal %}
+                <div class="goal-card">
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Due: </div>
+                        <div>{{ goal.due_date }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Time goal: </div>
+                        <div>{{ goal.time_goal }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Current Status: </div>
+                        <div>{{ goal.current_status }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Options: </div>
+                        <div>
+                            <a href="{% url 'listening_goal_edit' pk=goal.pk%}"> Edit </a>
+                            <a href="{% url 'listening_goal_delete' pk=goal.pk%}"> Delete </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> New Cards goal: </div>
-                    <div>{{ goal.new_cards_goal }}</div>
-                </div>
-                <div class="card-attr">
-                    <div class="card-attr-label"> Current Status: </div>
-                    <div>{{ goal.current_status }}</div>
-                </div>
+            {% endfor %}
+            <div class="create-new-content goal-creation-button">
+                <a href="{% url 'listening_goal_create' %}">+</a>
             </div>
-        {% endfor %}
+            </div>
+        </div>
+        <div class="goals-box" id="srs">
+            <div class="category-label"> SRS Goals </div>
+            <div class='goal-cards'>
+            {% for goal in srsgoal %}
+                <div class="goal-card">
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Due: </div>
+                        <div>{{ goal.due_date }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> New Cards goal: </div>
+                        <div>{{ goal.new_cards_goal }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Current Status: </div>
+                        <div>{{ goal.current_status }}</div>
+                    </div>
+                    <div class="card-attr">
+                        <div class="card-attr-label"> Options: </div>
+                        <div>
+                            <a href="{% url 'srs_goal_edit' pk=goal.pk%}"> Edit </a>
+                            <a href="{% url 'srs_goal_delete' pk=goal.pk%}"> Delete </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="create-new-content goal-creation-button">
+                <a href="{% url 'srs_goal_create' %}">+</a>
+            </div>
+            </div>
         </div>
     </div>
 {% endblock %}

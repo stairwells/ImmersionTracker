@@ -5,5 +5,7 @@
 @import "all_entries.css";
 @import "all_media.css";
 @import "forms.css";
+@import 'details.css';
+@import 'delete.css';
 @import 'goals.css';
 @import 'languages.css';

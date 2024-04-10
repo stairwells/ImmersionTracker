@@ -39,4 +39,3 @@ class ReadingEntryDeleteViewTest(TestBase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('all_entries'))
         self.assertFalse(ReadingEntry.objects.filter(pk=self.entry.pk).exists())
-

@@ -2,7 +2,11 @@
 
 {% block main_content %}
 <div class="media-wrapper">
-    <div class="media-category-box">
+    <div class="category-tabs-wrapper">
+        <div class="category-tab">Reading</div>
+        <div class="category-tab">Listening</div>
+    </div>
+    <div class="media-category-box" id="reading">
         <div class="media-category-label"> Reading Media </div>
         <hr>
         <div class="media-grid-container reading">
@@ -23,9 +27,11 @@
                 </div>
             {% endfor %}
         </div>
-        <p><a href="{% url 'reading_media_create' %}"> New reading media </a></p>
+        <div class="create-new-content">
+            <a href="{% url 'reading_media_create' %}">+</a>
+        </div>
     </div>
-    <div class="media-category-box">
+    <div class="media-category-box" id="listening">
         <div class="media-category-label"> Listening Media </div>
         <hr>
         <div class="media-grid-container reading">
@@ -46,7 +52,9 @@
                 </div>
             {% endfor %}
         </div>
-        <p><a href="{% url 'listening_media_create' %}"> New Listening Media </a></p>
+        <div class="create-new-content">
+            <a href="{% url 'listening_media_create' %}">+</a>
+        </div>
     </div>
 </div>
 {% endblock %}

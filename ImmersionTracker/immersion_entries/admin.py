@@ -5,14 +5,17 @@ from ImmersionTracker.immersion_entries.models import ReadingEntry, ListeningEnt
 
 @admin.register(ReadingEntry)
 class ReadingEntryAdmin(admin.ModelAdmin):
-    list_display = ('user_profile', 'language', 'created_on', 'time_length', 'char_length', 'media')
+    list_display = ('pk', 'user_profile', 'language', 'created_on', 'time_length', 'char_length', 'media')
+    ordering = ('pk',)
 
 
 @admin.register(ListeningEntry)
 class ListeningEntryAdmin(admin.ModelAdmin):
-    list_display = ('user_profile', 'language', 'created_on', 'time_length', 'media')
+    list_display = ('pk', 'user_profile', 'language', 'created_on', 'time_length', 'media')
+    ordering = ('pk',)
 
 
 @admin.register(SRSEntry)
 class SRSEntryAdmin(admin.ModelAdmin):
-    list_display = ('user_profile', 'language', 'created_on', 'time_length', 'new_cards')
+    list_display = ('pk', 'user_profile', 'language', 'created_on', 'time_length', 'new_cards')
+    ordering = ('pk',)
